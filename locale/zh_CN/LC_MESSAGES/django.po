@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-10 17:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:90
+msgid "auto ID"
+msgstr "自动编号"
+
+#: models.py:91
+msgid "user"
+msgstr "本地关联用户"
+
+#: models.py:93
+msgid "username"
+msgstr "账户"
+
+#: models.py:94
+msgid "password"
+msgstr "密码"
+
+#: models.py:97
+msgid "activate status"
+msgstr "激活状态"
+
+#: models.py:98
+msgid "insert datetime"
+msgstr "添入时间"
+
+#: models.py:104
+msgid "ring info"
+msgstr "环信账户"
+
+#: models.py:105
+msgid "ring info list"
+msgstr "环信账户列表"

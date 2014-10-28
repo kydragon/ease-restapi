@@ -1,0 +1,20 @@
+{
+    "key" : "kylin#demo",
+    "org" : "kylin",
+    "admin" : {
+        "username" : "kylinfish@126.com",
+        "password" : "12345678"
+    },
+    "app" : 
+        {
+            "name" : "demo",
+            "credentials" : {
+                "client_id" : "YXA6Rk8BEeSi5TeHrwDkGROGyw",
+                "client_secret" : "YXA6LiOOTZ4yBDljcwgynteHo2DUi_Q"
+            },
+            "admin" : {
+                "username" : "kylin",
+                "password" : "hello666"
+            }
+        }
+}
