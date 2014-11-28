@@ -14,6 +14,11 @@ from .service import *
 
 from .common import id_generator
 
+if six.PY3:
+    range_ = range
+else:
+    range_ = xrange
+
 
 def test_org_admin_token():
     u"""org Admin token.
@@ -21,7 +26,7 @@ def test_org_admin_token():
     # org_admin的认证方式
     org_admin_auth = OrgAdminAccountAuth(org_admin_username, org_admin_password)
     # 获取org管理员的token
-    print "Get org admin token: " + org_admin_auth.get_token()
+    six.print_("Get org admin token: " + org_admin_auth.get_token())
 
     return org_admin_auth
 
@@ -31,7 +36,7 @@ def test_app_admin_token_passwd():
     """
     # 获取app管理员的token
     app_admin_auth = AppAdminAccountAuth(app_admin_username, app_admin_password)
-    print "Get app admin token:" + app_admin_auth.get_token()
+    six.print_("Get app admin token:" + app_admin_auth.get_token())
 
     return app_admin_auth
 
@@ -41,7 +46,7 @@ def test_app_admin_token_client():
     """
     # 通过client id和secret来获取app管理员的token
     app_client_auth = AppClientAuth(CLIENT_ID, CLIENT_SECRET)
-    print "Get app admin token with client id/secret: " + app_client_auth.get_token()
+    six.print_("Get app admin token with client id/secret: " + app_client_auth.get_token())
 
     return app_client_auth
 
@@ -50,20 +55,20 @@ def test_register_user_open():
     u"""用户开放注册
     """
 
-    print "now let's register some users...."
+    six.print_("now let's register some users....")
 
     app_users = []
     num_users = 1  # 10
-    for i in range(num_users):
+    for i in range_(num_users):
         username = id_generator()
 
         password = '123456'
         success, result = create_user_open(username, password)
         if success:
-            print "registered new user %s in appkey[%s]" % (username, APP_KEY)
+            six.print_("registered new user %s in appkey[%s]" % (username, APP_KEY))
             app_users.append(username)
         else:
-            print "failed to register new user %s in appkey[%s]" % (username, APP_KEY)
+            six.print_("failed to register new user %s in appkey[%s]" % (username, APP_KEY))
 
     return app_users
 
@@ -74,20 +79,20 @@ def test_register_user_credit():
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's register some users...."
+    six.print_("now let's register some users....")
 
     app_users = []
     num_users = 1  # 10
-    for i in range(num_users):
+    for i in range_(num_users):
         username = id_generator()
 
         password = '123456'
         success, result = create_user_credit(app_auth, username, password)
         if success:
-            print "registered new user %s in appkey[%s]" % (username, APP_KEY)
+            six.print_("registered new user %s in appkey[%s]" % (username, APP_KEY))
             app_users.append(username)
         else:
-            print "failed to register new user %s in appkey[%s]" % (username, APP_KEY)
+            six.print_("failed to register new user %s in appkey[%s]" % (username, APP_KEY))
 
     return app_users
 
@@ -100,10 +105,10 @@ def test_del_user(username):
     # app_auth = test_app_admin_token_client()
     success, result = delete_user(app_auth, username)
     if success:
-        print "user[%s] is deleted from appkey[%s]" % (username, APP_KEY)
+        six.print_("user[%s] is deleted from appkey[%s]" % (username, APP_KEY))
         return 'ok'
     else:
-        print "failed to delete user[%s] from appkey[%s]" % (username, APP_KEY)
+        six.print_("failed to delete user[%s] from appkey[%s]" % (username, APP_KEY))
         return 'error'
 
 
@@ -119,7 +124,7 @@ def test_delete_user():
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
 
-    print "now let's delete users just created, this time we're using app_client_auth"
+    six.print_("now let's delete users just created, this time we're using app_client_auth")
 
     org_count = len(app_users)
     cur_count = 0
@@ -128,9 +133,9 @@ def test_delete_user():
         success, result = delete_user(app_auth, username)
         if success:
             cur_count += 1
-            print "user[%s] is deleted from appkey[%s]" % (username, APP_KEY)
+            six.print_("user[%s] is deleted from appkey[%s]" % (username, APP_KEY))
         else:
-            print "failed to delete user[%s] from appkey[%s]" % (username, APP_KEY)
+            six.print_("failed to delete user[%s] from appkey[%s]" % (username, APP_KEY))
 
     return {'org_count': org_count, 'cur_count': cur_count}
 
@@ -143,7 +148,7 @@ def test_remain_user(step=None):
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's update user info."
+    six.print_("now let's update user info.")
 
     # 要测试模块函数:
     username = 'kylinfish'
@@ -165,7 +170,7 @@ def test_send_file():
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's send an image"
+    six.print_("now let's send an image")
 
     # 测试官方Demo失败:
     # success, result = send_file(app_client_auth, get_json_path(APP_BASE_PATH, 'zjg.jpg'))
@@ -173,7 +178,7 @@ def test_send_file():
     # 测试成功:
     success, result = upload_media(app_auth, get_json_path(APP_BASE_PATH, 'zjg.jpg'))
 
-    print result
+    six.print_(result)
 
     return success, result
 
@@ -184,7 +189,7 @@ def test_down_file():
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's download an image"
+    six.print_("now let's download an image")
 
     # entity = {
     # "uuid": "030dec90-4489-11e4-a778-fb4c6c765344",
@@ -210,7 +215,7 @@ def test_friend(step=None):
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's friend module testing"
+    six.print_("now let's friend module testing")
 
     # 要测试模块函数:
     success, result = 'None', 'None'
@@ -236,7 +241,7 @@ def test_group(step=None):
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's group module testing"
+    six.print_("now let's group module testing")
 
     # 要测试模块函数:
     success, result = 'None', 'None'
@@ -287,7 +292,7 @@ def test_message(step=None):
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's message module testing"
+    six.print_("now let's message module testing")
 
     # 要测试模块函数:
     success, result = 'None', 'None'
@@ -312,13 +317,13 @@ def test_records():
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's records module testing"
+    six.print_("now let's records module testing")
 
     # 要测试模块函数:
     # success, result = 'None', 'None'
     success, result = export_chat_message(app_auth, ql=None, limit=None, cursor=None)
 
-    print result
+    six.print_(result)
 
     return success, result
 
@@ -331,7 +336,7 @@ def test_batch(step=None):
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's batch module testing"
+    six.print_("now let's batch module testing")
 
     # 要测试模块函数:
     success, result = 'None', 'None'
@@ -359,7 +364,7 @@ def test_select(step=None):
 
     app_auth = test_app_admin_token_passwd()
     # app_auth = test_app_admin_token_client()
-    print "now let's select module testing"
+    six.print_("now let's select module testing")
 
     # 要测试模块函数:
     # success, result = 'None', 'None'
@@ -413,6 +418,6 @@ if __name__ == '__main__':
 
     # test_main()
 
-    # print CLIENT_ID, '|', CLIENT_SECRET
+    six.print_(CLIENT_ID, '|', CLIENT_SECRET)
 
     pass

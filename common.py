@@ -5,12 +5,18 @@ __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 __doc__ = 'local and ring-info code integration.'
 
+import six
 import json
 import random
 import string
 import os.path
 
 from django.http import HttpResponse
+
+if six.PY3:
+    range_ = range
+else:
+    range_ = xrange
 
 
 def duct_json(dict_data):
@@ -31,7 +37,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     u"""用来随机生成用户名
         :仅仅用来测试用的
     """
-    return ''.join(random.choice(chars) for _ in range(size))
+    return ''.join(random.choice(chars) for _ in range_(size))
 
 
 def get_json_path(base_path, conf_file=None, *path):

@@ -6,6 +6,7 @@ __date__ = '2014/09/20'
 __doc__ = 'ring info remote api interface base.'
 
 import os
+import six
 import time
 import json
 import random
@@ -85,7 +86,7 @@ def check_ring_id(ring_id):
         环信ID中间不能有空格或者井号（#）等特殊字符
     """
 
-    print str(ring_id)
+    six.print_(str(ring_id))
 
     pass
 
@@ -129,7 +130,7 @@ def http_result(r):
         }
         if r.request.body:
             error_log["payload"] = r.request.body
-            # print json.dumps(error_log)
+            # six.print_(json.dumps(error_log)
 
     if r.status_code == requests.codes.ok:
         return True, r.json()

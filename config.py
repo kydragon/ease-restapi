@@ -4,6 +4,7 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
+import six
 import os.path
 
 # import sys
@@ -52,6 +53,6 @@ if __name__ == '__main__':
     """
 
     file_path = get_json_path(APP_BASE_PATH, "info.json")
-    print file_path
+    six.print_(file_path)
 
-    print locals()
+    six.print_(locals())

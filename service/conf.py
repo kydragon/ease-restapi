@@ -5,13 +5,11 @@ __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 __doc__ = 'ring info remote api conf data required.'
 
-from django.core.exceptions import ImproperlyConfigured
-
 try:
     from django.conf import settings
 
-    DEBUG = settings.DEBUG
-except ImproperlyConfigured:
+    DEBUG = getattr(settings, "DEBUG", True)
+except (ImportError, Exception):
     DEBUG = True
 
 from ..config import APP_KEY, APP_ORG, APP_NAME, CLIENT_ID, CLIENT_SECRET

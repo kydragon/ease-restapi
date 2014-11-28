@@ -6,6 +6,7 @@ __date__ = '2014/09/23'
 __doc__ = 'ring info client service sdk.'
 
 import os
+import six
 import os.path
 import requests
 
@@ -41,7 +42,7 @@ def upload_media(auth, file_path):
         "restrict-access": True
     }
 
-    print 'file_rename:', file_rename
+    six.print_('file_rename:', file_rename)
     url = HOST_SERVER + ("/%s/%s/chatfiles" % (APP_ORG, APP_NAME))
     r = requests.post(url, files=files, headers=required_header, auth=auth)
     return http_result(r)

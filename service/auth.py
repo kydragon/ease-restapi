@@ -5,6 +5,7 @@ __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 __doc__ = 'ring info auth code.'
 
+import six
 from time import time
 from requests.auth import AuthBase
 
@@ -20,9 +21,9 @@ class MeToken:
         self.token = token
         self.expires_in = expires_in + int(time())
 
-        # print '|', expires_in, '|'
-        # print 'token:', self.token
-        # print 'expires:', self.expires_in
+        six.print_('|', expires_in, '|')
+        six.print_('token:', self.token)
+        six.print_('expires:', self.expires_in)
 
     def is_not_valid(self):
         u"""这个token是否还合法, 或者说, 是否已经失效了, 这里我们只需要
