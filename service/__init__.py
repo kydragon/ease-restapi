@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""ring info client service sdk.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
-__doc__ = 'ring info client service sdk.'
+
 
 from .auth import AppClientAuth, AppAdminAccountAuth, OrgAdminAccountAuth
 

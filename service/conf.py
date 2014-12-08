@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+ring info remote api conf data required.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
-__doc__ = 'ring info remote api conf data required.'
 
 try:
     from django.conf import settings

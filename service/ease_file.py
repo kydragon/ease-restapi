@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""ring info client service sdk.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/23'
-__doc__ = 'ring info client service sdk.'
 
 import os
 import six
@@ -18,7 +20,10 @@ down_file_dir = check_file_dir(os.path.join(os.getcwd(), 'download'))
 
 
 def upload_media(auth, file_path):
-    u"""上传语音图片
+    u"""上传语音图片.
+
+        :param auth: 身份认证
+        :param file_path: 文件路径
 
         所需要的 HTTP Header:
         * Authorization: 获取到的token
@@ -49,10 +54,10 @@ def upload_media(auth, file_path):
 
 
 def write_file_data(res, file_name):
-    u"""从远程下载文件写入数据到本地
+    u"""从远程下载文件写入数据到本地.
 
-        :res: 远程Response对象
-        :file_name: 本地文件名
+        :param res: 远程Response对象
+        :param file_name: 本地文件名
     """
 
     fp = None
@@ -70,7 +75,11 @@ def write_file_data(res, file_name):
 
 
 def download_media(auth, file_name, secret):
-    u"""下载图片,语音文件
+    u"""下载图片,语音文件.
+
+        :param auth: 身份认证
+        :param file_name: 文件名
+        :param secret: 共享密匙
 
         这里需要注意的就是, 需要在http header中带上上面返回的 share-secret 和当前登陆用户的token才能够下载,
         同时注意header中执行的accept的值需要设置成 application/octet-stream
@@ -94,7 +103,11 @@ def download_media(auth, file_name, secret):
 
 
 def download_thumbnail(auth, file_name, secret):
-    u"""下载缩略图
+    u"""下载缩略图.
+
+        :param auth: 身份认证
+        :param file_name: 文件名
+        :param secret: 共享密匙
 
         环信支持在服务器短自动的创建图片的缩略图, 可以先下载缩略图, 当用户有需求的时候, 再下载大图
         这里和下载大图唯一不同的就是heaer中多了一个”thumbnail: true”,

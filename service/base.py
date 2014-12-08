@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""ring info remote api interface base.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
-__doc__ = 'ring info remote api interface base.'
 
 import os
 import six
@@ -22,11 +24,18 @@ from .conf import DEBUG, JSON_HEADER, DIR_DOWNLOAD_FILES
 
 def check_file_dir(dir_path):
     u"""检查目录是否存在, 若不存在创建.
+
+        :param dir_path: 目录
     """
 
     os.path.isdir(dir_path)
 
     def create_path(my_path):
+        u"""创建目录
+
+            :param my_path: 目录
+        """
+
         if not os.path.exists(my_path):
             os.mkdir(my_path)
 
@@ -43,6 +52,8 @@ def check_file_dir(dir_path):
 
 def build_file_rename(file_name):
     u"""本地文件上传异地重命名
+
+        :param file_name: 文件名
     """
 
     str_file_suf = file_name.split('.')[-1]
@@ -54,7 +65,8 @@ def build_file_rename(file_name):
 def build_query_url(url, dict_data):
     u"""构建get形式的请求地址
 
-        :dict_data:dict形式的query数据
+        :param url: 请求地址
+        :param dict_data:dict形式的query数据
     """
 
     # urllib.urlencode() 不幸的是, 这个函数只能接收key-value pair格式的数据, 即只针对dict的.
@@ -64,6 +76,8 @@ def build_query_url(url, dict_data):
 
 def build_query_string(ql=None):
     u"""构建sql query 的查询urlencode
+
+        :param ql: sql
     """
 
     result = ''
@@ -77,7 +91,9 @@ def build_query_string(ql=None):
 
 
 def check_ring_id(ring_id):
-    u"""检测环信ID
+    u"""检测环信ID.
+
+        :param ring_id: 环信账户名
 
         环信ID需要使用英文字母和（或）数字的组合
         环信ID不能使用中文
@@ -93,6 +109,10 @@ def check_ring_id(ring_id):
 
 def put(url, payload, auth=None):
     u"""构建put请求
+
+        :param url: 请求地址
+        :param payload:　dict形式的query数据
+        :param auth: 身份认证
     """
     r = requests.put(url, data=json.dumps(payload), headers=JSON_HEADER, auth=auth)
     return http_result(r)
@@ -100,6 +120,10 @@ def put(url, payload, auth=None):
 
 def post(url, payload, auth=None):
     u"""构建Post请求
+
+        :param url: 请求地址
+        :param payload:　dict形式的query数据
+        :param auth: 身份认证
     """
     r = requests.post(url, data=json.dumps(payload), headers=JSON_HEADER, auth=auth)
     return http_result(r)
@@ -107,19 +131,31 @@ def post(url, payload, auth=None):
 
 def get(url, auth=None):
     u"""构建Get请求
+
+        :param url: 请求地址
+        :param auth: 身份认证
     """
+
     r = requests.get(url, headers=JSON_HEADER, auth=auth)
     return http_result(r)
 
 
 def delete(url, auth=None):
-    u"""构建Delete请求
+    u"""构建Delete请求.
+
+        :param url: 请求地址
+        :param auth: 身份认证
     """
     r = requests.delete(url, headers=JSON_HEADER, auth=auth)
     return http_result(r)
 
 
 def http_result(r):
+    u"""解析返回结果.
+
+        :param r: 返回对象
+    """
+
     if DEBUG:
         error_log = {
             "method": r.request.method,

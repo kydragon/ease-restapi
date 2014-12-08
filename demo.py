@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""ring info local code test, only test so on.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/25'
-__doc__ = 'ring info local code test, only test so on.'
 
 # import sys
 #
@@ -11,7 +13,6 @@ __doc__ = 'ring info local code test, only test so on.'
 
 from .config import *
 from .service import *
-
 from .common import id_generator
 
 if six.PY3:
@@ -52,14 +53,14 @@ def test_app_admin_token_client():
 
 
 def test_register_user_open():
-    u"""用户开放注册
+    u"""用户开放注册.
     """
 
     six.print_("now let's register some users....")
 
     app_users = []
     num_users = 1  # 10
-    for i in range_(num_users):
+    for _ in range_(num_users):
         username = id_generator()
 
         password = '123456'
@@ -74,7 +75,7 @@ def test_register_user_open():
 
 
 def test_register_user_credit():
-    u"""用户授权注册
+    u"""用户授权注册.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -83,7 +84,7 @@ def test_register_user_credit():
 
     app_users = []
     num_users = 1  # 10
-    for i in range_(num_users):
+    for _ in range_(num_users):
         username = id_generator()
 
         password = '123456'
@@ -98,7 +99,9 @@ def test_register_user_credit():
 
 
 def test_del_user(username):
-    u"""测试删除用户
+    u"""测试删除用户.
+
+        :param username: 用户名
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -113,7 +116,7 @@ def test_del_user(username):
 
 
 def test_delete_user():
-    u"""删除用户
+    u"""删除用户.
     """
 
     if OPEN_OR_CREDIT:
@@ -141,9 +144,9 @@ def test_delete_user():
 
 
 def test_remain_user(step=None):
-    u"""测试账户信息修改
+    u"""测试账户信息修改.
 
-        :step: [1,2] 测试步骤, 两个步骤中的一个.
+        :param step: [1,2] 测试步骤, 两个步骤中的一个.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -165,7 +168,7 @@ def test_remain_user(step=None):
 
 
 def test_send_file():
-    u"""发送文件
+    u"""发送文件.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -184,7 +187,7 @@ def test_send_file():
 
 
 def test_down_file():
-    u"""测试下载文件
+    u"""测试下载文件.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -208,9 +211,9 @@ def test_down_file():
 
 
 def test_friend(step=None):
-    u"""测试ease_friend模块
+    u"""测试ease_friend模块.
 
-        :step: [1,2,3] 测试步骤, 三个步骤中的一个.
+        :param step: [1,2,3] 测试步骤, 三个步骤中的一个.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -234,9 +237,9 @@ def test_friend(step=None):
 
 
 def test_group(step=None):
-    u"""测试ease_group模块
+    u"""测试ease_group模块.
 
-        :step: [1,2,3,4,5,6,7] 测试步骤, 七个步骤中的一个.
+        :param step: [1,2,3,4,5,6,7] 测试步骤, 七个步骤中的一个.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -285,9 +288,9 @@ def test_group(step=None):
 
 
 def test_message(step=None):
-    u"""测试ease_message模块
+    u"""测试ease_message模块.
 
-        :step: [1,2] 测试步骤, 两个步骤中的一个.
+        :param step: [1,2] 测试步骤, 两个步骤中的一个.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -302,7 +305,7 @@ def test_message(step=None):
         username = ['kylinfish', None]
         message = "hello world, my name is kylinfish."
 
-        dict_data = build_message_data(message, target, target_type="users", username=username[0])
+        dict_data = build_message_data(message, target, username=username[0])
         success, result = send_message(app_auth, dict_data)
 
     elif step == 2:
@@ -312,7 +315,7 @@ def test_message(step=None):
 
 
 def test_records():
-    u"""测试ease_records模块
+    u"""测试ease_records模块.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -321,7 +324,7 @@ def test_records():
 
     # 要测试模块函数:
     # success, result = 'None', 'None'
-    success, result = export_chat_message(app_auth, ql=None, limit=None, cursor=None)
+    success, result = export_chat_message(app_auth)
 
     six.print_(result)
 
@@ -329,9 +332,9 @@ def test_records():
 
 
 def test_batch(step=None):
-    u"""测试ease_batch模块
+    u"""测试ease_batch模块.
 
-        :step: [1,2,3] 测试步骤, 三个步骤中的一个.
+        :param step: [1,2,3] 测试步骤, 三个步骤中的一个.
     """
 
     app_auth = test_app_admin_token_passwd()
@@ -350,7 +353,7 @@ def test_batch(step=None):
 
         success, result = create_users(app_auth, play_load)
     elif step == 2:
-        success, result = pickup_users(app_auth, limit=None, cursor=None)
+        success, result = pickup_users(app_auth)
     elif step == 3:
         ql = "order by created desc"
         success, result = delete_users(app_auth, ql=ql, limit=2)
@@ -359,7 +362,9 @@ def test_batch(step=None):
 
 
 def test_select(step=None):
-    u"""测试ease_select模块
+    u"""测试ease_select模块.
+
+        :param step: 步骤
     """
 
     app_auth = test_app_admin_token_passwd()

@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""ring info user system local code.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
-__doc__ = 'ring info user system local code.'
 
 # import base64
 
@@ -12,9 +14,10 @@ from .base import get, post, delete, build_query_url
 
 
 def create_users(auth, play_load):
-    u"""注册IM用户[批量] 建议批量不要过多, 在20-60之间
+    u"""注册IM用户[批量] 建议批量不要过多, 在20-60之间.
 
-        :play_load: [{'username':'${用户名1}','password':'${密码}'},…]
+        :param auth: 身份认证
+        :param play_load: [{'username':'${用户名1}','password':'${密码}'},…]
 
         Path : /{org_name}/{app_name}/users
         HTTP Method : POST
@@ -29,7 +32,11 @@ def create_users(auth, play_load):
 
 
 def pickup_users(auth, limit=None, cursor=None):
-    u"""获取IM用户[批量查询]
+    u"""获取IM用户[批量查询].
+
+    :param auth: 身份认证
+    :param limit: 数量值
+    :param cursor: 游标
 
     该接口默认返回最近创建的10个用户, 如果需要指定获取数量，需加上参数limit=N，N为数量值.
     关于分页：如果DB中的数量大于N, 返回json会携带一个字段“cursor”, 我们把它叫做”游标”, 该游标可理解为结果集的指针, 值是变化的.
@@ -66,7 +73,7 @@ def pickup_users(auth, limit=None, cursor=None):
         payload.append("cursor=%s" % cursor)
 
     if payload:
-        url += "?" + "&".join(payload)
+        url = ''.join((url, "?", "&".join(payload)))
 
     # 处理数据的另外方式
     # query = {"limit": limit, "cursor": cursor}
@@ -76,7 +83,11 @@ def pickup_users(auth, limit=None, cursor=None):
 
 
 def delete_users(auth, ql=None, limit=None):
-    u""""删除IM用户[批量]
+    u""""删除IM用户[批量].
+
+    :param auth: 身份认证
+    :param ql: sql
+    :param limit: 数量值
 
     删除某个app下指定数量的环信账号。可一次删除N个用户, 数值可以修改.
     建议这个数值在100-500之间, 不要过大.
@@ -111,7 +122,7 @@ def delete_users(auth, ql=None, limit=None):
         payload.append("limit=%d" % limit)
 
     if payload:
-        url += "?" + "&".join(payload)
+        url = ''.join((url, "?", "&".join(payload)))
     """
 
     # 处理数据的另外方式

@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""local and ring-info code integration.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
-__doc__ = 'local and ring-info code integration.'
 
 import six
 import json
@@ -20,31 +22,37 @@ else:
 
 
 def duct_json(dict_data):
-    u"""封装json返回数据
+    u"""封装json返回数据.
+
+        :param dict_data
     """
 
     return HttpResponse(json.dumps(dict_data, ensure_ascii=False))
 
 
 def parse_app_key(app_key):
-    u"""解析app_key得到org和app
-        :app_key的规则是{org}#{app}
+    u"""解析app_key得到org和app.
+
+        :param app_key的规则是{org}#{app}
     """
     return tuple(app_key.split('#'))
 
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
-    u"""用来随机生成用户名
-        :仅仅用来测试用的
+    u"""用来随机生成用户名, 仅仅用来测试用的.
+
+        :param size: 长度
+        :param chars: 限定字符
     """
     return ''.join(random.choice(chars) for _ in range_(size))
 
 
 def get_json_path(base_path, conf_file=None, *path):
-    u"""获取json配置文件路径
+    u"""获取json配置文件路径.
 
         :param base_path: 起始点相对路径
         :param conf_file: json配置文件/其它文件
+        :param path: 其它配置文件
 
         支持两种调用格式：
         get_json_path(base_path,conf_file)
@@ -62,7 +70,9 @@ def get_json_path(base_path, conf_file=None, *path):
 
 
 def get_json_config(file_path):
-    u"""从配置文件获取配置信息
+    u"""从配置文件获取配置信息.
+
+        :param file_path: json配置文件/其它文件
     """
 
     conf_file = file(file_path)

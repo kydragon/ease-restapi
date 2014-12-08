@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""ring info data model.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
-__doc__ = 'ring info data model.'
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -48,7 +50,7 @@ class RingInfoManager(models.Manager):
     def ring_uid_exists(self, user):
         u"""判断环信客户信息项是否存在
 
-            param user: 用户
+            :param user: 用户
         """
 
         ring_info = self.get_ring_uid(user=user)
@@ -115,6 +117,8 @@ class RingInfo(models.Model):
 
     def update_info(self, **dicts):
         u"""设置并更新指定字段的值
+
+            :param dicts
         """
 
         for (key, value) in dicts.items():
@@ -123,6 +127,8 @@ class RingInfo(models.Model):
 
     def set_password(self, raw_password):
         u""""如果使用加密密码
+
+            :param raw_password: 密码
         """
 
         self.password = make_password(raw_password)
@@ -131,6 +137,8 @@ class RingInfo(models.Model):
         u"""
         Returns a boolean of whether the raw_password was correct. Handles
         hashing formats behind the scenes.
+
+            :param raw_password: 密码
         """
 
         def setter(password):

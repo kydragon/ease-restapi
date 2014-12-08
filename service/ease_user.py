@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-u"""
+u"""ring info user system local code.
+
     注册IM用户[单个]
     在url指定的org和app中创建一个新的用户, 分两种模式：开放注册 和 授权注册.
     "开放注册"模式: 注册环信账号时不用携带管理员身份认证信息.
@@ -12,14 +13,16 @@ u"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
-__doc__ = 'ring info user system local code.'
 
 from .conf import HOST_SERVER, APP_ORG, APP_NAME
 from .base import get, put, post, delete
 
 
 def create_user_open(username, password):
-    u"""开放注册
+    u"""开放注册.
+
+        :param username: 用户名
+        :param password: 密码
 
         Path : /{org_name}/{app_name}/users
         HTTP Method : POST
@@ -36,11 +39,15 @@ def create_user_open(username, password):
 
     payload = {"username": username, "password": password}
     url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
-    return post(url, payload=payload, auth=None)
+    return post(url, payload=payload)
 
 
 def create_user_credit(auth, username, password):
-    u"""授权注册
+    u"""授权注册.
+
+        :param auth: 身份认证
+        :param username: 用户名
+        :param password: 密码
 
         Path : /{org_name}/{app_name}/users
         HTTP Method : POST
@@ -62,7 +69,11 @@ def create_user_credit(auth, username, password):
 
 
 def delete_user(auth, username):
-    u"""删除用户
+    u"""删除用户.
+
+        :param auth: 身份认证
+        :param username: 用户名
+
         DELETE /{org}/{app}/users/{username}
     """
 
@@ -71,7 +82,12 @@ def delete_user(auth, username):
 
 
 def passwd_user(auth, username, new_password, old_password=None):
-    u""""置IM用户密码
+    u""""置IM用户密码.
+
+        :param auth: 身份认证
+        :param username: 用户名
+        :param new_password: 新密码
+        :param old_password: 老密码
 
         Path : /{org_name}/{app_name}/users/{user_primary_key}/password
         HTTP Method : PUT
@@ -90,7 +106,10 @@ def passwd_user(auth, username, new_password, old_password=None):
 
 
 def pickup_user(auth, username):
-    u"""获取IM用户[主键查询]
+    u"""获取IM用户[主键查询].
+
+        :param auth: 身份认证
+        :param username: 用户名
 
         对users来说，有两个primary key: username 和 uuid,通过他们都可以获取到一个用户
 

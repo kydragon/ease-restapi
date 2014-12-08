@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""ring info auth code.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
-__doc__ = 'ring info auth code.'
 
 import six
 from time import time
@@ -13,8 +15,8 @@ from .conf import HOST_SERVER, APP_ORG, APP_NAME
 from .base import post
 
 
-class MeToken:
-    u"""表示一个登陆获取到的token对象
+class MeToken(object):
+    u"""表示一个登陆获取到的token对象.
     """
 
     def __init__(self, token, expires_in):
@@ -27,7 +29,7 @@ class MeToken:
 
     def is_not_valid(self):
         u"""这个token是否还合法, 或者说, 是否已经失效了, 这里我们只需要
-        检查当前的时间, 是否已经比或者这个token的时间过去了expires_in秒
+        检查当前的时间, 是否已经比或者这个token的时间过去了expires_in秒.
 
         即current_time_in_seconds < (expires_in + token_acquired_time)
         """
@@ -42,7 +44,7 @@ class MeToken:
 
 
 class ServiceAuth(AuthBase):
-    u"""环信登陆认证的基类
+    u"""环信登陆认证的基类.
     """
 
     def __init__(self):
@@ -53,7 +55,7 @@ class ServiceAuth(AuthBase):
         return r
 
     def get_token(self):
-        u"""在这里我们先检查是否已经获取过token, 并且这个token有没有过期
+        u"""在这里我们先检查是否已经获取过token, 并且这个token有没有过期.
         """
 
         if self.token is None or self.token.is_not_valid():
@@ -63,8 +65,8 @@ class ServiceAuth(AuthBase):
         return str(self.token)
 
     def acquire_token(self):
-        u"""真正的获取token的方法, 返回值是一个我们定义的Token对象
-            这个留给子类去实现
+        u"""真正的获取token的方法, 返回值是一个我们定义的Token对象.
+            这个留给子类去实现.
         """
         pass
 

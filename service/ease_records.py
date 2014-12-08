@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""ring info client service sdk.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
-__doc__ = 'ring info client service sdk.'
 
 import base64
 
@@ -12,7 +14,12 @@ from .base import get
 
 
 def export_chat_message(auth, ql=None, limit=None, cursor=None):
-    u"""导出聊天记录, 取聊天记录
+    u"""导出聊天记录, 取聊天记录.
+
+        :param auth: 身份认证
+        :param ql:
+        :param limit:
+        :param cursor:
 
         Path : /{org_name}/{app_name}/chatmessages
         HTTP Method : GET
@@ -50,7 +57,7 @@ def export_chat_message(auth, ql=None, limit=None, cursor=None):
         payload.append("ql=%s" % base64.urlsafe_b64encode(ql))
 
     if payload:
-        url += "?" + "&".join(payload)
+        url = ''.join((url, "?", "&".join(payload)))
 
     # 处理数据的另外方式
     # query = {"limit": limit, "cursor": cursor}
@@ -60,7 +67,7 @@ def export_chat_message(auth, ql=None, limit=None, cursor=None):
 
 
 def export_chat_media():
-    u"""导出语音图片文件
+    u"""导出语音图片文件.
 
         官方暂为实现服务端.
     """

@@ -27,6 +27,9 @@ def check_remote_user(auth, local_username):
     u"""检测环信某个账户名是否已经存在.
 
         此函数的功能主要是出于, 本地系统在集成环信前, 早期即有账户的过渡可能需要.
+
+        :param auth: 身份认证
+        :param local_username: 本地用户名
     """
 
     remote_user_exist = False
@@ -42,10 +45,9 @@ def check_remote_user(auth, local_username):
 def chalk_remote_user(local_username, local_password):
     u"""根据本地用户信息, 生成环信账户的映射.
 
-        username: username.
-            是第三方用户体系中的primary_key, 需要在app_key的范围内唯一.
+        :param local_username: 用户名, 第三方用户体系中的primary_key, 需要在app_key的范围内唯一.
 
-        password: 密码.
+        :param local_password: 用户密码.
             为保证第三方用户体系中的账号密码不必要的泄露给环信, 建议对第三方用户体系的账号密码做一次hash算法.
             然后在手机端登录环信时, 客户端同样适用hash后的密码登录.
     """
@@ -55,12 +57,12 @@ def chalk_remote_user(local_username, local_password):
 
 
 def create_easemob_user(local_username, local_password):
-    u"""从本地账户创建环信账户
+    u"""从本地账户创建环信账户.
 
         使用: 将该函数的调用使用在本地系统的账户注册里, 根据该函数的结果做记录处理.
 
-        :local_username:本地账户名
-        :local_password: 本地账户密码
+        :param local_username:本地账户名
+        :param local_password: 本地账户密码
     """
 
     if not SWITCH_JOIN_LOCAL:
@@ -82,10 +84,10 @@ def create_easemob_user(local_username, local_password):
 
 
 def passwd_easemob_user(local_username, local_password):
-    u"""本地账户密码修改, 影响环信账户的密码修改
+    u"""本地账户密码修改, 影响环信账户的密码修改.
 
-        :local_username:本地账户名
-        :local_password: 本地账户密码
+        :param local_username:本地账户名
+        :param local_password: 本地账户密码
     """
 
     if not SWITCH_JOIN_LOCAL:
@@ -108,11 +110,11 @@ def join_easemob_local(user_profile, username, password, saved=False):
 
         检测集成与否->集成->如果集成成功, 则保存.
 
-        :user_profile:本地账户信息表model类实例.
+        :param user_profile:本地账户信息表model类实例.
 
-        :username: 本地账户
-        :password:本地密码
-        :saved: 是否保存,如果外层调用该代码之后有保存,这里就默认False, 反之True.
+        :param username: 本地账户
+        :param password:本地密码
+        :param saved: 是否保存,如果外层调用该代码之后有保存,这里就默认False, 反之True.
     """
 
     result = False

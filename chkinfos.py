@@ -1,15 +1,17 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""ring info model check.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
-__doc__ = 'ring info model check.'
 
 from .models import RingInfo
 
 
 def check_ring_info(user, username):
-    u"""检测新建注册信息
+    u"""检测新建注册信息.
 
         :param user: 用户
         :param username: 账户
@@ -24,7 +26,7 @@ def check_ring_info(user, username):
 
 
 def enable_ring_info(ring_info, action=True):
-    u"""环信账户,禁用或激活
+    u"""环信账户,禁用或激活.
 
         :param ring_info: 信息项
         :param action: 激活/禁用
@@ -39,7 +41,7 @@ def enable_ring_info(ring_info, action=True):
 
 
 def passwd_ring_info(ring_info, password, encrypt=False):
-    u"""环信账户,更换密码
+    u"""环信账户,更换密码.
 
         :param ring_info: 信息项
         :param password: 密码
@@ -59,7 +61,7 @@ def passwd_ring_info(ring_info, password, encrypt=False):
 
 
 def delete_ring_info(user):
-    u"""删除环信账户信息
+    u"""删除环信账户信息.
 
         :param user: 用户
     """

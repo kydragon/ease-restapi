@@ -9,16 +9,15 @@ from .demo import test_main
 
 
 def test(request):
-    u"""预留测试
+    u"""预留测试.
     """
 
-    error = 9999
     if request.method != 'POST':
-        return duct_json({'error': error})
+        return duct_json({'error': 9999})
 
 
 def debug(request):
-    u"""暂时,用于代码调试.
+    u"""暂时, 用于代码调试.
     """
 
     result_data = test_main()

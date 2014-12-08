@@ -9,7 +9,6 @@ u"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/24'
-__doc__ = 'ring info client service sdk.'
 
 import json
 import requests
@@ -18,7 +17,7 @@ from .conf import APP_ORG, APP_NAME, HOST_SERVER, JSON_HEADER, CLIENT_ID, CLIENT
 
 
 def get_token_client():
-    u"""使用app的client_id和client_secret获取授权token
+    u"""使用app的client_id和client_secret获取授权token.
 
         client_id 和 client_secret可以在环信管理后台的app详情页面看到
 
@@ -55,7 +54,10 @@ def get_token_client():
 
 
 def get_token_account(username, password):
-    u"""使用app管理员的username和password获取授权token
+    u"""使用app管理员的username和password获取授权token.
+
+        :param username: 用户名
+        :param password: 密码
 
         Path : /{org_name}/{app_name}/token
         HTTP Method : POST

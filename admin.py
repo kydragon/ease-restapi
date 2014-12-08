@@ -9,6 +9,9 @@ from .models import RingInfo
 
 
 class RingInfoAdmin(admin.ModelAdmin):
+    u"""自定义ModelAdmin.
+    """
+
     list_display = ('id', 'user', 'username', 'password', 'status', 'add_date',)
 
     ordering = ('-id',)

@@ -1,16 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""ring info user system local code.
+"""
+
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
-__doc__ = 'ring info user system local code.'
 
 from .conf import HOST_SERVER, APP_ORG, APP_NAME
 from .base import get, build_query_url  # build_query_string
 
 
 def select_users(auth, ql=None):
-    u"""获取IM用户[条件查询]
+    u"""获取IM用户[条件查询].
+
+        :param auth: 身份认证
+        :param ql: sql
 
         条件查询通过ql类实现 类似RDB的sql语句.
         比如说查询username为kylin的用户.
@@ -27,7 +32,7 @@ def select_users(auth, ql=None):
 
     url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
 
-    # url += build_query_string(ql)
+    # url = ''.join((url, build_query_string(ql)))
 
     # 处理数据的另外方式
     if ql:
