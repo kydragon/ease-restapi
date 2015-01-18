@@ -49,7 +49,7 @@ OPEN_OR_CREDIT = True
 
 # 本地业务是否集成该接入
 # False: 不接入; True: 接入
-SWITCH_JOIN_LOCAL = False
+SWITCH_JOIN_LOCAL = True
 
 if __name__ == '__main__':
     u"""单元测试

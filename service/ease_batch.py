@@ -27,7 +27,7 @@ def create_users(auth, play_load):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
     return post(url, play_load, auth)
 
 
@@ -64,7 +64,7 @@ def pickup_users(auth, limit=None, cursor=None):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
 
     payload = []
     if limit:
@@ -112,7 +112,7 @@ def delete_users(auth, ql=None, limit=None):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
 
     """
     payload = []

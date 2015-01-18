@@ -38,7 +38,7 @@ def create_user_open(username, password):
     """
 
     payload = {"username": username, "password": password}
-    url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
     return post(url, payload=payload)
 
 
@@ -64,7 +64,7 @@ def create_user_credit(auth, username, password):
     """
 
     payload = {"username": username, "password": password}
-    url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
     return post(url, payload=payload, auth=auth)
 
 
@@ -77,7 +77,7 @@ def delete_user(auth, username):
         DELETE /{org}/{app}/users/{username}
     """
 
-    url = HOST_SERVER + ("/%s/%s/users/%s" % (APP_ORG, APP_NAME, username))
+    url = "%s/%s/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username)
     return delete(url, auth)
 
 
@@ -101,7 +101,7 @@ def passwd_user(auth, username, new_password, old_password=None):
     if old_password:
         payload["old_password"] = old_password
 
-    url = HOST_SERVER + ("/%s/%s/users/%s/password" % (APP_ORG, APP_NAME, username))
+    url = "%s/%s/%s/users/%s/password" % (HOST_SERVER, APP_ORG, APP_NAME, username)
     return put(url, payload, auth)
 
 
@@ -125,5 +125,5 @@ def pickup_user(auth, username):
 
     """
 
-    url = HOST_SERVER + ("/%s/%s/users/%s" % (APP_ORG, APP_NAME, username))
+    url = "%s/%s/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username)
     return get(url, auth)

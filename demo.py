@@ -11,9 +11,16 @@ __date__ = '2014/09/25'
 #
 # sys.path.append('../..')
 
-from .config import *
+import six
+
+from .config import (APP_KEY, APP_BASE_PATH, CLIENT_ID, CLIENT_SECRET, OPEN_OR_CREDIT,
+                     app_admin_username, app_admin_password, org_admin_password, org_admin_username,
+                     get_json_path)
+
 from .service import *
 from .common import id_generator
+from .bridge import create_easemob_user
+
 
 if six.PY3:
     range_ = range
@@ -27,7 +34,7 @@ def test_org_admin_token():
     # org_admin的认证方式
     org_admin_auth = OrgAdminAccountAuth(org_admin_username, org_admin_password)
     # 获取org管理员的token
-    six.print_("Get org admin token: " + org_admin_auth.get_token())
+    six.print_("Get org admin token: %s" % org_admin_auth.get_token())
 
     return org_admin_auth
 
@@ -37,7 +44,7 @@ def test_app_admin_token_passwd():
     """
     # 获取app管理员的token
     app_admin_auth = AppAdminAccountAuth(app_admin_username, app_admin_password)
-    six.print_("Get app admin token:" + app_admin_auth.get_token())
+    six.print_("Get app admin token:%s" % app_admin_auth.get_token())
 
     return app_admin_auth
 
@@ -412,7 +419,9 @@ def test_main():
     # result = test_records()
     # result = test_batch()
     # result = test_select(True)
-    result = test_remain_user(2)
+    # result = test_remain_user(2)
+
+    result = create_easemob_user('851112@qq.com', '123456')
 
     return result
 
@@ -421,8 +430,8 @@ if __name__ == '__main__':
     u"""单元测试
     """
 
-    # test_main()
+    test_main()
 
-    six.print_(CLIENT_ID, '|', CLIENT_SECRET)
+    # six.print_(CLIENT_ID, '|', CLIENT_SECRET)
 
-    pass
+    # pass

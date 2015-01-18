@@ -17,10 +17,55 @@ __date__ = '2014/09/28'
 __doc__ = 'local and ring-info code integration.'
 
 import hmac
-from hashlib import sha1
+import hashlib
 
 from .config import APP_KEY, OPEN_OR_CREDIT, SWITCH_JOIN_LOCAL, app_admin_username, app_admin_password
 from .service import AppAdminAccountAuth, create_user_open, create_user_credit, passwd_user, pickup_user
+
+
+class HashFunction(object):
+    @classmethod
+    def mac_new(cls, password):
+        """hmac."""
+
+        new_password = hmac.new(APP_KEY, password, hashlib.md5).hexdigest()
+        return new_password
+
+    @classmethod
+    def py_this(cls, password):
+        """java develop fell not easy."""
+
+        password = ''.join((APP_KEY, password))
+
+        d = {}
+        for c in (65, 97):
+            for i in range(26):
+                d[chr(i + c)] = chr((i + 13) % 26 + c)
+        new_password = "".join([d.get(c, c) for c in password])
+        return new_password
+
+    @classmethod
+    def hash_mode(cls, password, hash_class):
+        """add another mode."""
+
+        return hash_class(password).hexdigest()
+
+
+def check_user_id(local_username):
+    u"""环信ID规则
+
+    :param local_username: 本地用户名
+
+    环信ID需要使用英文字母和（或）数字的组合
+        环信ID不能使用中文
+        环信ID不能使用email地址
+        环信ID不能使用UUID
+        环信ID中间不能有空格或者井号（#）等特殊字符
+    """
+
+    local_username = local_username.replace('@', '_')
+
+    return local_username
 
 
 def check_remote_user(auth, local_username):
@@ -52,8 +97,10 @@ def chalk_remote_user(local_username, local_password):
             然后在手机端登录环信时, 客户端同样适用hash后的密码登录.
     """
 
-    remote_password = hmac.new(APP_KEY, local_password, sha1).digest()
-    return local_username, remote_password
+    local_username = check_user_id(local_username)
+    local_password = HashFunction.hash_mode(local_password, hashlib.md5)
+
+    return local_username, local_password
 
 
 def create_easemob_user(local_username, local_password):

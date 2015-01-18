@@ -15,9 +15,10 @@ import random
 import os.path
 import requests
 
-import urllib
-# import base64
-# import urllib2,urllib3
+if six.PY3:
+    from urllib.parse import urlencode, quote
+else:
+    from urllib import urlencode, quote
 
 from .conf import DEBUG, JSON_HEADER, DIR_DOWNLOAD_FILES
 
@@ -69,8 +70,8 @@ def build_query_url(url, dict_data):
         :param dict_data:dict形式的query数据
     """
 
-    # urllib.urlencode() 不幸的是, 这个函数只能接收key-value pair格式的数据, 即只针对dict的.
-    params = urllib.urlencode(dict_data)
+    # urlencode() 不幸的是, 这个函数只能接收key-value pair格式的数据, 即只针对dict的.
+    params = urlencode(dict_data)
     return "%s?%s" % (url, params)
 
 
@@ -83,8 +84,8 @@ def build_query_string(ql=None):
     result = ''
 
     if ql:
-        result = "?" + "ql=%s" % urllib.quote(ql)
-        # result = "?" + "ql=%s" % urllib.unquote(ql)
+        result = "?ql=%s" % quote(ql)
+        # result = "?" + "ql=%s" % unquote(ql)
         # result = "?" + "ql=%s" % base64.urlsafe_b64encode(ql)  # urlsafe_b64encode 接不上REST API
 
     return result

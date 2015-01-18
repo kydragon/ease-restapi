@@ -51,7 +51,7 @@ class ServiceAuth(AuthBase):
         self.token = None
 
     def __call__(self, r):
-        r.headers['Authorization'] = 'Bearer ' + self.get_token()
+        r.headers['Authorization'] = 'Bearer %s' % self.get_token()
         return r
 
     def get_token(self):
@@ -156,7 +156,7 @@ class OrgAdminAccountAuth(ServiceAuth):
         super(OrgAdminAccountAuth, self).__init__()
         self.username = username
         self.password = password
-        self.url = HOST_SERVER + "/management/token"
+        self.url = "%s/management/token" % HOST_SERVER
         self.token = None
 
     def acquire_token(self):

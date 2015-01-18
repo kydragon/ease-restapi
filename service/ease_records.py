@@ -45,7 +45,7 @@ def export_chat_message(auth, ql=None, limit=None, cursor=None):
         同上参数需要转义
     """
 
-    url = HOST_SERVER + ("/%s/%s/chatmessages" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/chatmessages" % (HOST_SERVER, APP_ORG, APP_NAME)
 
     payload = []
 

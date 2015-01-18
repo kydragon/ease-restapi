@@ -77,7 +77,7 @@ def send_message(auth, dict_data):
         }
     """
 
-    url = HOST_SERVER + ("/%s/%s/messages" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/messages" % (HOST_SERVER, APP_ORG, APP_NAME)
     return post(url, payload=dict_data, auth=auth)
 
 
@@ -96,5 +96,5 @@ def look_user_status(auth, username):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = HOST_SERVER + ("/%s/%s/users/%s/status" % (APP_ORG, APP_NAME, username))
+    url = "%s/%s/%s/users/%s/status" % (HOST_SERVER, APP_ORG, APP_NAME, username)
     return get(url, auth)

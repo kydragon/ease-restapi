@@ -10,7 +10,7 @@ __date__ = '2014/09/20'
 import six
 import json
 import random
-import string
+from string import ascii_uppercase, digits
 import os.path
 
 from django.http import HttpResponse
@@ -75,8 +75,13 @@ def get_json_config(file_path):
         :param file_path: json配置文件/其它文件
     """
 
-    conf_file = file(file_path)
-    json_value = json.load(conf_file)
+    try:
+        conf_file = open(file_path)
+        json_value = json.load(conf_file)
+        conf_file.close()
+    except (IOError, Exception) as e:
+        six.print_(e)
+        return
 
     app_key = json_value['key']
     app_org, app_name = parse_app_key(app_key)

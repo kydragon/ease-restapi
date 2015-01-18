@@ -48,7 +48,7 @@ def upload_media(auth, file_path):
     }
 
     six.print_('file_rename:', file_rename)
-    url = HOST_SERVER + ("/%s/%s/chatfiles" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/chatfiles" % (HOST_SERVER, APP_ORG, APP_NAME)
     r = requests.post(url, files=files, headers=required_header, auth=auth)
     return http_result(r)
 
@@ -96,7 +96,7 @@ def download_media(auth, file_name, secret):
         "Accept": "application/octet-stream"
     }
 
-    url = HOST_SERVER + ("/%s/%s/chatfiles/%s" % (APP_ORG, APP_NAME, file_name))
+    url = "%s/%s/%s/chatfiles/%s" % (HOST_SERVER, APP_ORG, APP_NAME, file_name)
     res = requests.get(url, headers=required_header, auth=auth)
 
     return write_file_data(res, file_name)
@@ -127,7 +127,7 @@ def download_thumbnail(auth, file_name, secret):
         "Accept": "application/octet-stream"
     }
 
-    url = HOST_SERVER + ("/%s/%s/chatfiles/%s" % (APP_ORG, APP_NAME, file_name))
+    url = "%s/%s/%s/chatfiles/%s" % (HOST_SERVER, APP_ORG, APP_NAME, file_name)
     res = requests.get(url, headers=required_header, auth=auth)
 
     return write_file_data(res, 'thumb_%s' % file_name)

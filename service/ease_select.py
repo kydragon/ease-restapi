@@ -30,7 +30,7 @@ def select_users(auth, ql=None):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = HOST_SERVER + ("/%s/%s/users" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
 
     # url = ''.join((url, build_query_string(ql)))
 

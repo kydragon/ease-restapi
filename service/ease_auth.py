@@ -47,7 +47,7 @@ def get_token_client():
         "client_secret": CLIENT_SECRET
     }
 
-    url = HOST_SERVER + ("/%s/%s/token" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
     success, result = requests.post(url, data=json.dumps(payload), headers=JSON_HEADER)
     if success:
         return result['access_token'], result['expires_in']
@@ -72,7 +72,7 @@ def get_token_account(username, password):
         'password': password
     }
 
-    url = HOST_SERVER + ("/%s/%s/token" % (APP_ORG, APP_NAME))
+    url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
     success, result = requests.post(url, data=json.dumps(payload), headers=JSON_HEADER)
     if success:
         return result['access_token'], result['expires_in']
