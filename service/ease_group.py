@@ -7,6 +7,7 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/23'
 
+import six
 from .conf import HOST_SERVER, APP_ORG, APP_NAME
 from .base import get, post, delete
 
@@ -134,3 +135,50 @@ def user_kick_group(auth, group_id, username):
 
     url = "%s/%s/%s/chatgroups/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, group_id, username)
     return delete(url, auth)
+
+
+def modify_group(auth, group_id, **kwargs):
+    u"""修改群组信息.
+
+        :param auth: 身份认证
+        :param group_id: 群组ID, 注意: 非群组名称
+        :param kwargs: 用户值 {"groupname": groupname, "description": description, "description": description}
+
+        修改成功的数据行会返回true,失败为false. 请求body只接收groupname，description，maxusers　三个属性，传其他字段会被忽略．
+
+        Path : /{org_name}/{app_name}/chatgroups/{group_id}
+        HTTP Method : PUT
+        URL Params ： 无
+        Request Headers : {“Authorization”:”Bearer ${token}”}
+        Request Body ：{
+            "groupname":"testrestgrp12", //群组名称
+            "description":"update groupinfo", //群组描述
+            "maxusers":300, //群组成员最大数(包括群主), 值为数值类型
+        }
+
+        Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
+    """
+
+    # payload = {"groupname": groupname, "description": description, "description": description}
+    # six.print_(kwargs)
+
+    url = "%s/%s/%s/chatgroups/%s" % (HOST_SERVER, APP_ORG, APP_NAME, group_id)
+    return put(url, kwargs, auth)
+
+
+def pickup_user_group(auth, username):
+    u"""获取一个用户参与的所有群组.
+
+        :param auth: 身份认证
+        :param username: 用户
+
+        Path : /{org_name}/{app_name}/users/{username}/joined_chatgroups
+        HTTP Method : GET
+        URL Params ： 无
+        Request Headers : {“Authorization”:”Bearer ${token}”}
+        Request Body ：无
+        Response Body ：详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略
+    """
+
+    url = "%s/%s/%s/users/%s/joined_chatgroups" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    return get(url, auth)

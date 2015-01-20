@@ -79,7 +79,7 @@ class AppClientAuth(ServiceAuth):
         super(AppClientAuth, self).__init__()
         self.client_id = client_id
         self.client_secret = client_secret
-        self.url = HOST_SERVER + ("/%s/%s/token" % (APP_ORG, APP_NAME))
+        self.url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
         self.token = None
 
     def acquire_token(self):
@@ -114,7 +114,7 @@ class AppAdminAccountAuth(ServiceAuth):
         super(AppAdminAccountAuth, self).__init__()
         self.username = username
         self.password = password
-        self.url = HOST_SERVER + ("/%s/%s/token" % (APP_ORG, APP_NAME))
+        self.url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
         self.token = None
 
     def acquire_token(self):

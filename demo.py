@@ -54,7 +54,7 @@ def test_app_admin_token_client():
     """
     # 通过client id和secret来获取app管理员的token
     app_client_auth = AppClientAuth(CLIENT_ID, CLIENT_SECRET)
-    six.print_("Get app admin token with client id/secret: " + app_client_auth.get_token())
+    six.print_("Get app admin token with client id/secret: %s" % app_client_auth.get_token())
 
     return app_client_auth
 

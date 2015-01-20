@@ -127,3 +127,19 @@ def pickup_user(auth, username):
 
     url = "%s/%s/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username)
     return get(url, auth)
+
+
+def modify_nickname(auth, username, nickname):
+    """修改用户昵称.
+
+        Path : /{org_name}/{app_name}/users/{username}
+        HTTP Method : PUT
+        URL Params : 无
+        Request Headers : {“Authorization”:”Bearer ${token}”}
+        Request Body ： {“nickname” : “${昵称值}”}
+        Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
+    """
+
+    payload = {"nickname": nickname}
+    url = "%s/%s/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    return put(url, payload, auth)

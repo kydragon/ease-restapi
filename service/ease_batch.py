@@ -130,3 +130,25 @@ def delete_users(auth, ql=None, limit=None):
     url = build_query_url(url, query)
 
     return delete(url, auth)
+
+
+def add_group_users(auth, group_id, usernames):
+    u"""群组批量添加成员.
+
+        :param auth: 身份认证
+        :param group_id: 群组ID, 注意: 非群组名称
+        :param usernames: 用户列表
+
+        Path : /{org_name}/{app_name}/chatgroups/{chatgroupid}/users
+        HTTP Method : POST
+        URL Params ： 无
+        Request Headers : {“Authorization”:”Bearer ${token}”}
+        Request Body ：{“usernames”:[“username1”,”username2”]}’
+                        — usernames固定属性，作为json的KEY；username1/username2 要添加到群中的成员用户名，可变
+
+        Response Body ：详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略
+    """
+
+    payload = {"usernames": usernames}
+    url = "%s/%s/%s/chatgroups/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME, group_id)
+    return post(url, payload, auth)
