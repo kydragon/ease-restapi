@@ -21,6 +21,9 @@ from .ease_file import upload_media, download_media, download_thumbnail
 from .ease_group import user_join_group, user_kick_group, modify_group, pickup_group_users, pickup_user_group
 from .ease_group import build_group_data, create_group, delete_group, details_group, pickup_groups
 
-from .ease_message import build_message_data, send_message, look_user_status
-from .ease_records import export_chat_message
+from .ease_msgdata import MessageTxtData, MessageImgData, MessageAudioData, MessageVideoData, MessageTransmissionData
+from .ease_message import (build_message_data, look_user_status, send_txt_message, send_img_message,
+                           send_audio_message, send_video_message, send_transmission_message)
+
+from .ease_records import export_chat_message, export_chat_media, offline_msg_count
 from .ease_black import add_user_blacklist, del_user_blacklist, pickup_user_blacklist

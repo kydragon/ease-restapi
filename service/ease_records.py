@@ -69,7 +69,25 @@ def export_chat_message(auth, ql=None, limit=None, cursor=None):
 def export_chat_media():
     u"""导出语音图片文件.
 
-        官方暂为实现服务端.
+        官方暂未实现服务端.
     """
 
     pass
+
+
+def offline_msg_count(auth, username):
+    u"""获取未读消息数
+
+        获取一个IM用户的未读消息数
+
+        Path : /{org_name}/{app_name}/users/{owner_username}/offline_msg_count
+        HTTP Method : GET
+        URL Params : 无
+        Request Headers : {“Authorization”:”Bearer ${token}”}
+        Request Body ： 无
+        Response Body ： “data” : {“v3y0kf9arx” : 0 } —- 用户名：v3y0kf9arx ，未读消息数：0条
+
+    """
+
+    url = "%s/%s/%s/users/%s/offline_msg_count" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    return get(url, auth)
