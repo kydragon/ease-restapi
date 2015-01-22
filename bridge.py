@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
 u"""
 集成后:
     注册(附带)
@@ -10,6 +12,13 @@ u"""
 集成前:
     集成前的账户信息, 要适应集成后的机制来保证数据的完整性.
     建议本地账户信息(比如: UserProfile), 增加环信账户状态字段. 比如: ring_info, 初始值为: False, 完成环信注册后为: True.
+
+可能修改:
+    根据本地业务修改的, 可能的修改如下.
+
+    check_user_id:      账户生成方式.
+    chalk_remote_user:  密码生成方式.
+    join_easemob_local: 环信账户状态字段, 本地账户昵称字段.
 """
 
 __author__ = 'kylinfish@126.com'
@@ -19,8 +28,13 @@ __doc__ = 'local and ring-info code integration.'
 import hmac
 import hashlib
 
+import six
+
 from .config import APP_KEY, OPEN_OR_CREDIT, SWITCH_JOIN_LOCAL, app_admin_username, app_admin_password
-from .service import AppAdminAccountAuth, create_user_open, create_user_credit, passwd_user, pickup_user
+from .service import (AppAdminAccountAuth, create_user_open, create_user_credit,
+                      passwd_user, pickup_user, modify_nickname)
+
+app_auth = AppAdminAccountAuth(app_admin_username, app_admin_password)
 
 
 class HashFunction(object):
@@ -52,7 +66,7 @@ class HashFunction(object):
 
 
 def check_user_id(local_username):
-    u"""环信ID规则
+    u"""环信ID规则检测, 生成环信用户名
 
     :param local_username: 本地用户名
 
@@ -63,22 +77,26 @@ def check_user_id(local_username):
         环信ID中间不能有空格或者井号（#）等特殊字符
     """
 
-    local_username = local_username.replace('@', '_')
+    # 因为邮箱登陆机制, 所以做简单替换生成环信账户处理.
+    remote_username = local_username.replace('@', '_')
 
-    return local_username
+    # 除上规则, 还可以使用 HashFunction 方式生成账户.
+    # remote_username = HashFunction.hash_mode(local_username, hashlib.md5)
+
+    return remote_username
 
 
-def check_remote_user(auth, local_username):
+def check_remote_user(auth, remote_username):
     u"""检测环信某个账户名是否已经存在.
 
         此函数的功能主要是出于, 本地系统在集成环信前, 早期即有账户的过渡可能需要.
 
         :param auth: 身份认证
-        :param local_username: 本地用户名
+        :param remote_username: 环信用户名
     """
 
     remote_user_exist = False
-    success, result = pickup_user(auth, username=local_username)
+    success, result = pickup_user(auth, username=remote_username)
 
     if success:
         if 'entities' in result and len(result["entities"]) > 0:
@@ -118,7 +136,6 @@ def create_easemob_user(local_username, local_password):
     remote_username, remote_password = chalk_remote_user(local_username, local_password)
 
     if OPEN_OR_CREDIT:
-        app_auth = AppAdminAccountAuth(app_admin_username, app_admin_password)
         success, result = create_user_credit(app_auth, remote_username, remote_password)
     else:
         success, result = create_user_open(remote_username, remote_password)
@@ -140,10 +157,29 @@ def passwd_easemob_user(local_username, local_password):
     if not SWITCH_JOIN_LOCAL:
         return False
 
-    app_auth = AppAdminAccountAuth(app_admin_username, app_admin_password)
     remote_username, remote_password = chalk_remote_user(local_username, local_password)
 
     success, result = passwd_user(app_auth, remote_username, remote_password)
+    if success:
+        flag = True
+    else:
+        flag = False
+
+    return flag
+
+
+def change_easemob_nickname(local_username, local_nickname):
+    u"""本地账户密码修改, 影响环信账户的密码修改.
+
+        :param local_username:本地账户名
+        :param local_nickname: 本地账户昵称
+    """
+
+    if not SWITCH_JOIN_LOCAL:
+        return False
+
+    remote_username = check_user_id(local_username)
+    success, result = modify_nickname(app_auth, remote_username, local_nickname)
     if success:
         flag = True
     else:
@@ -169,6 +205,22 @@ def join_easemob_local(user_profile, username, password, saved=False):
         result = create_easemob_user(local_username=username, local_password=password)
     if result:
         user_profile.ring_join = 1
+
+        # Fixed:
+        # http://www.easemob.com/docs/android/setnickname/
+
+        # 此方法主要为了在苹果推送时能够推送昵称(nickname)而不是userid.
+        # 一般可以在登陆成功后从自己服务器获取到个人信息, 然后拿到nick更新到环信服务器.
+        # 并且, 在个人信息中如果更改个人的昵称, 也要把环信服务器更新下nickname 防止显示差异.
+
+        # 如果自己用户体系有昵称, 则更新到环信.
+        # user_profile.name 为本地用户昵称字段, 变通需注意.
+        if user_profile.name:
+            try:
+                change_easemob_nickname(username, user_profile.name)
+            except Exception as e:
+                # 对此过程不做一定成功处理.
+                six.print_(e)
 
         if saved:
             user_profile.save()

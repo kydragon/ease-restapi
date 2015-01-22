@@ -9,4 +9,4 @@ __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 __doc__ = 'local and ring-info code integration.'
 
-from .bridge import create_easemob_user, passwd_easemob_user, join_easemob_local
+from .bridge import change_easemob_nickname, passwd_easemob_user, join_easemob_local

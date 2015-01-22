@@ -10,6 +10,7 @@
 + config.py为本地配置文件; common.py为本地公共类库; demo.py为service包的使用实例, 同时也是测试.
 + service包__init__.py提供REST API实现的对外调用.
 + gering包__init__.py提供环信与本地业务的对外调用.
++ usage.py提供本地业务的调用注意点.
 
 #####本地代码与环信账户的链接, 有两种形式:
 + 本地表的形式, 以models.py, admin.py, chkinfos.py为个单元, 实现本地账户与环信账户的链接.
