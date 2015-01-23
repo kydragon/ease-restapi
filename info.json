@@ -1,20 +1,19 @@
 {
-    "key" : "kylin#demo",
-    "org" : "kylin",
-    "admin" : {
-        "username" : "kylinfish@126.com",
-        "password" : "12345678"
+  "key": "kylin9999#demo",
+  "org": "kylindemo",
+  "admin": {
+    "username": "kylinfish",
+    "password": "kylin12345678"
+  },
+  "app": {
+    "name": "demo",
+    "credentials": {
+      "client_id": "YXA66mgIMKMTEeS2e530rkCQUA",
+      "client_secret": "YXA6fAHitxx_DueYiHIgxTQxhIW_DXY"
     },
-    "app" : 
-        {
-            "name" : "demo",
-            "credentials" : {
-                "client_id" : "YXA6Rk8BEeSi5TeHrwDkGROGyw",
-                "client_secret" : "YXA6LiOOTZ4yBDljcwgynteHo2DUi_Q"
-            },
-            "admin" : {
-                "username" : "kylin",
-                "password" : "hello666"
-            }
-        }
+    "admin": {
+      "username": "kylin",
+      "password": "hello666"
+    }
+  }
 }
