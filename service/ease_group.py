@@ -9,7 +9,7 @@ __date__ = '2014/09/23'
 
 import six
 from .conf import HOST_SERVER, APP_ORG, APP_NAME
-from .base import get, post, delete
+from .base import put, get, post, delete
 
 
 def build_group_data(group_name, desc, owner, public, approval=True, members=None):

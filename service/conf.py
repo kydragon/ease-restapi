@@ -38,5 +38,8 @@ CLIENT_SECRET = CLIENT_SECRET
 # APP download storage:
 DIR_DOWNLOAD_FILES = ''
 
+# APP admin token expires time:
+EXPIRES_IN = None  # 秒为单位, None为默认值. 官方默认是七天, 在有效期内不需要重复获取, 7天*24时*60分*60秒.
+
 JSON_HEADER = {'content-type': 'application/json'}
 HOST_SERVER = 'https://a1.easemob.com'

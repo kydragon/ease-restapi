@@ -82,3 +82,46 @@ def user_profile(request):
     passwd_easemob_user(username, password)
 
     return
+
+
+def user_nickname(request):
+    u"""从环信端用户名获取本地用户昵称.
+
+        环信好友列表, 会话列表, username值传入该接口, 以本地昵称形式显示客户端.
+
+        本地业务如有调整, 启用并修改下面注释代码, 增修字段.
+    """
+
+    if request.method != 'POST':
+        return {'error': 9999}
+
+    # 传入环信用户账户列表
+    user_name_list = None if 'usernames' not in request.POST else request.POST['usernames']
+    if not user_name_list:  # or user_name_list.count('@') > 0:  # 强制必须为环信规则
+        return {'error': 8888}
+
+    # 分解用户账户列表
+    void_list = []
+    is_error = False
+    user_nick_list = []
+    for user_name in user_name_list.split(','):
+        # 找到最后个'_', 替换为'@'
+        try:
+            # 如本地业务的用户名与环信username映射规则有变, 修改以下两行.
+            char_ind = user_name.rindex('_')
+            user_name = '@'.join((user_name[:char_ind], user_name[char_ind + 1:]))
+
+            user_nick_list.append(user_name)
+        except (ValueError, Exception):
+            # is_error = True
+            # break
+            void_list.append({'name': user_name})  # , ['field1': '','field2': '']})
+
+            if is_error:
+                return {'error': 8888}
+
+    user_info_list = None  # [model].objects.filter([field]__in=user_nick_list).values(['field1', 'field2'])
+    user_info_list = list(user_info_list)
+    user_info_list.extend(void_list)
+
+    return {'error': 0, 'array': user_info_list}

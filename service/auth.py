@@ -11,7 +11,7 @@ import six
 from time import time
 from requests.auth import AuthBase
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .conf import HOST_SERVER, APP_ORG, APP_NAME, EXPIRES_IN
 from .base import post
 
 
@@ -133,7 +133,10 @@ class AppAdminAccountAuth(ServiceAuth):
 
         success, result = post(self.url, payload)
         if success:
-            self.token = MeToken(result['access_token'], result['expires_in'])
+            if EXPIRES_IN:
+                self.token = MeToken(result['access_token'], EXPIRES_IN)
+            else:
+                self.token = MeToken(result['access_token'], result['expires_in'])
         else:
             # throws exception
             pass
@@ -174,7 +177,10 @@ class OrgAdminAccountAuth(ServiceAuth):
 
         success, result = post(self.url, payload)
         if success:
-            self.token = MeToken(result['access_token'], result['expires_in'])
+            if EXPIRES_IN:
+                self.token = MeToken(result['access_token'], EXPIRES_IN)
+            else:
+                self.token = MeToken(result['access_token'], result['expires_in'])
         else:
             # throws exception
             pass

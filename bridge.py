@@ -46,8 +46,19 @@ class HashFunction(object):
         return new_password
 
     @classmethod
-    def py_this(cls, password):
-        """java develop fell not easy."""
+    def hash_mode(cls, password, hash_class):
+        """add another mode."""
+
+        return hash_class(password).hexdigest()
+
+
+class BothFunction(object):
+    @classmethod
+    def python(cls, password):
+        """java develop fell not easy.
+        """
+
+        # import this code.
 
         password = ''.join((APP_KEY, password))
 
@@ -57,12 +68,6 @@ class HashFunction(object):
                 d[chr(i + c)] = chr((i + 13) % 26 + c)
         new_password = "".join([d.get(c, c) for c in password])
         return new_password
-
-    @classmethod
-    def hash_mode(cls, password, hash_class):
-        """add another mode."""
-
-        return hash_class(password).hexdigest()
 
 
 def check_user_id(local_username):
@@ -80,8 +85,13 @@ def check_user_id(local_username):
     # 因为邮箱登陆机制, 所以做简单替换生成环信账户处理.
     remote_username = local_username.replace('@', '_')
 
-    # 除上规则, 还可以使用 HashFunction 方式生成账户.
+    # 除上规则, 还可以使用以下两种方式生成账户:
+    # HashFunction: 考虑到在好友列表, 会话列表项, 如果要在客户端显示本地昵称, 需要反向推导, 有此需求不要使用以下方式.
     # remote_username = HashFunction.hash_mode(local_username, hashlib.md5)
+
+    # BothFunction: 可以满足反向推导.
+    # see pycrypto packae, you can more.
+    # remote_username = BothFunction.python(local_username)
 
     return remote_username
 

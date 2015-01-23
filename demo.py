@@ -313,7 +313,7 @@ def test_message(step=None):
         message = "hello world, my name is kylinfish."
 
         dict_data = build_message_data(message, target, username=username[0])
-        success, result = send_message(app_auth, dict_data)
+        success, result = send_txt_message(app_auth, dict_data)
 
     elif step == 2:
         success, result = look_user_status(app_auth, target[0])

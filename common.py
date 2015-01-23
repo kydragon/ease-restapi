@@ -38,7 +38,7 @@ def parse_app_key(app_key):
     return tuple(app_key.split('#'))
 
 
-def id_generator(size=6, chars=''.join((ascii_uppercase , digits))):
+def id_generator(size=6, chars=''.join((ascii_uppercase, digits))):
     u"""用来随机生成用户名, 仅仅用来测试用的.
 
         :param size: 长度
