@@ -16,9 +16,6 @@ from .conf import HOST_SERVER, APP_ORG, APP_NAME
 from .base import http_result, build_file_rename, check_file_dir
 
 
-down_file_dir = check_file_dir(os.path.join(os.getcwd(), 'download'))
-
-
 def upload_media(auth, file_path):
     u"""上传语音图片.
 
@@ -60,9 +57,11 @@ def write_file_data(res, file_name):
         :param file_name: 本地文件名
     """
 
+    down_file_dir = check_file_dir(os.path.join(os.getcwd(), 'download'))
+
     fp = None
     try:
-        fp = open('%s/%s' % (down_file_dir, file_name), 'wb')
+        fp = open(os.path.join(down_file_dir, file_name), 'wb')
         fp.write(res.content)
         error = 0
     except IOError:
