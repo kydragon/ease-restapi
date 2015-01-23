@@ -4,7 +4,7 @@
 """local and ring-info code integration.
 """
 
-__author__ = 'kylinfish@126.com'
+__author__ = 'kylin'
 __date__ = '2014/09/20'
 
 import six

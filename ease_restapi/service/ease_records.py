@@ -9,7 +9,7 @@ __date__ = '2014/09/22'
 
 import base64
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .. import config
 from .base import get
 
 
@@ -45,7 +45,7 @@ def export_chat_message(auth, ql=None, limit=None, cursor=None):
         同上参数需要转义
     """
 
-    url = "%s/%s/%s/chatmessages" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/chatmessages" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
 
     payload = []
 
@@ -89,5 +89,5 @@ def offline_msg_count(auth, username):
 
     """
 
-    url = "%s/%s/%s/users/%s/offline_msg_count" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s/offline_msg_count" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return get(url, auth)

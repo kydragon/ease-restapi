@@ -8,19 +8,21 @@ __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
 import os
-import six
 import time
 import json
 import random
 import os.path
 import requests
 
+import six
+
+
 if six.PY3:
     from urllib.parse import urlencode, quote
 else:
     from urllib import urlencode, quote
 
-from .conf import DEBUG, JSON_HEADER, DIR_DOWNLOAD_FILES
+from .. import config
 
 
 def check_file_dir(dir_path):
@@ -45,8 +47,8 @@ def check_file_dir(dir_path):
         else:
             return create_path(my_path)
 
-    if DIR_DOWNLOAD_FILES:
-        return create_path(DIR_DOWNLOAD_FILES)
+    if config.DIR_DOWNLOAD_FILES:
+        return create_path(config.DIR_DOWNLOAD_FILES)
     else:
         return create_path(dir_path)
 
@@ -115,7 +117,7 @@ def put(url, payload, auth=None):
         :param payload:　dict形式的query数据
         :param auth: 身份认证
     """
-    r = requests.put(url, data=json.dumps(payload), headers=JSON_HEADER, auth=auth)
+    r = requests.put(url, data=json.dumps(payload), headers=config.JSON_HEADER, auth=auth)
     return http_result(r)
 
 
@@ -126,7 +128,7 @@ def post(url, payload, auth=None):
         :param payload:　dict形式的query数据
         :param auth: 身份认证
     """
-    r = requests.post(url, data=json.dumps(payload), headers=JSON_HEADER, auth=auth)
+    r = requests.post(url, data=json.dumps(payload), headers=config.JSON_HEADER, auth=auth)
     return http_result(r)
 
 
@@ -137,7 +139,7 @@ def get(url, auth=None):
         :param auth: 身份认证
     """
 
-    r = requests.get(url, headers=JSON_HEADER, auth=auth)
+    r = requests.get(url, headers=config.JSON_HEADER, auth=auth)
     return http_result(r)
 
 
@@ -147,7 +149,7 @@ def delete(url, auth=None):
         :param url: 请求地址
         :param auth: 身份认证
     """
-    r = requests.delete(url, headers=JSON_HEADER, auth=auth)
+    r = requests.delete(url, headers=config.JSON_HEADER, auth=auth)
     return http_result(r)
 
 
@@ -157,7 +159,7 @@ def http_result(r):
         :param r: 返回对象
     """
 
-    if DEBUG:
+    if config.REST_API_DEBUG:
         error_log = {
             "method": r.request.method,
             "url": r.request.url,

@@ -30,11 +30,11 @@ import hashlib
 
 import six
 
-from .config import APP_KEY, OPEN_OR_CREDIT, SWITCH_JOIN_LOCAL, app_admin_username, app_admin_password
+from .config import APP_KEY, OPEN_OR_CREDIT, SWITCH_JOIN_LOCAL, APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD
 from .service import (AppAdminAccountAuth, create_user_open, create_user_credit,
                       passwd_user, pickup_user, modify_nickname)
 
-app_auth = AppAdminAccountAuth(app_admin_username, app_admin_password)
+app_auth = AppAdminAccountAuth(APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD)
 
 
 class HashFunction(object):

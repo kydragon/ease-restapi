@@ -7,7 +7,7 @@ u"""ring info black list local code.
 __author__ = 'kylin'
 __date__ = '2015/01/20'
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .. import config
 from .base import get, post, delete
 
 
@@ -27,7 +27,7 @@ def add_user_blacklist(auth, username, usernames):
     """
 
     payload = {"usernames": usernames}
-    url = "%s/%s/%s/users/%s/blocks/users" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s/blocks/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return post(url, payload=payload, auth=auth)
 
 
@@ -46,7 +46,8 @@ def del_user_blacklist(auth, username, blocked_username):
         Response Body ： entities 中包含了刚刚从黑名单中移除的IM用户的详细信息
     """
 
-    url = "%s/%s/%s/users/%s/blocks/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username, blocked_username)
+    url = "%s/%s/%s/users/%s/blocks/users/%s" % (
+        config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username, blocked_username)
     return delete(url, auth)
 
 
@@ -64,6 +65,6 @@ def pickup_user_blacklist(auth, username):
         Response Body ： “data” : [ “stliu2” ] — 黑名单中的用户的用户名：stliu2
     """
 
-    url = "%s/%s/%s/users/%s/blocks/users" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s/blocks/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return get(url, auth)
 

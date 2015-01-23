@@ -7,7 +7,7 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .. import config
 from .base import get, post
 
 
@@ -61,7 +61,7 @@ def look_user_status(auth, username):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = "%s/%s/%s/users/%s/status" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s/status" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return get(url, auth)
 
 
@@ -78,7 +78,7 @@ def send_message(auth, dict_data):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = "%s/%s/%s/messages" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/messages" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     return post(url, payload=dict_data, auth=auth)
 
 
@@ -180,7 +180,7 @@ def send_audio_message(auth, dict_data):
         }
     """
 
-    url = "%s/%s/%s/messages" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/messages" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     return post(url, payload=dict_data, auth=auth)
 
 

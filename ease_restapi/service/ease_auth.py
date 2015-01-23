@@ -13,7 +13,7 @@ __date__ = '2014/09/24'
 import json
 import requests
 
-from .conf import APP_ORG, APP_NAME, HOST_SERVER, JSON_HEADER, CLIENT_ID, CLIENT_SECRET
+from .. import config
 
 
 def get_token_client():
@@ -43,12 +43,12 @@ def get_token_client():
 
     payload = {
         "grant_type": "client_credentials",
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET
+        "client_id": config.CLIENT_ID,
+        "client_secret": config.CLIENT_SECRET
     }
 
-    url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
-    success, result = requests.post(url, data=json.dumps(payload), headers=JSON_HEADER)
+    url = "%s/%s/%s/token" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
+    success, result = requests.post(url, data=json.dumps(payload), headers=config.JSON_HEADER)
     if success:
         return result['access_token'], result['expires_in']
 
@@ -72,7 +72,7 @@ def get_token_account(username, password):
         'password': password
     }
 
-    url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
-    success, result = requests.post(url, data=json.dumps(payload), headers=JSON_HEADER)
+    url = "%s/%s/%s/token" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
+    success, result = requests.post(url, data=json.dumps(payload), headers=config.JSON_HEADER)
     if success:
         return result['access_token'], result['expires_in']

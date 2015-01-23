@@ -11,16 +11,18 @@ __date__ = '2014/09/25'
 #
 # sys.path.append('../..')
 
+import os.path
+
 import six
 
-from .config import (APP_KEY, APP_BASE_PATH, CLIENT_ID, CLIENT_SECRET, OPEN_OR_CREDIT,
-                     app_admin_username, app_admin_password, org_admin_password, org_admin_username,
-                     get_json_path)
+from .config import (APP_KEY, CLIENT_ID, CLIENT_SECRET, OPEN_OR_CREDIT,
+                     APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD, ORG_ADMIN_PASSWORD, ORG_ADMIN_USERNAME)
 
-from .service import *
-from .common import id_generator
-from .bridge import create_easemob_user
+from ease_restapi.service import *
+from ease_restapi.bridge import create_easemob_user
+from .common import id_generator, get_json_path
 
+APP_BASE_PATH = os.path.abspath(__file__)
 
 if six.PY3:
     range_ = range
@@ -32,7 +34,7 @@ def test_org_admin_token():
     u"""org Admin token.
     """
     # org_admin的认证方式
-    org_admin_auth = OrgAdminAccountAuth(org_admin_username, org_admin_password)
+    org_admin_auth = OrgAdminAccountAuth(ORG_ADMIN_USERNAME, ORG_ADMIN_PASSWORD)
     # 获取org管理员的token
     six.print_("Get org admin token: %s" % org_admin_auth.get_token())
 
@@ -43,7 +45,7 @@ def test_app_admin_token_passwd():
     u"""App Admin token.
     """
     # 获取app管理员的token
-    app_admin_auth = AppAdminAccountAuth(app_admin_username, app_admin_password)
+    app_admin_auth = AppAdminAccountAuth(APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD)
     six.print_("Get app admin token:%s" % app_admin_auth.get_token())
 
     return app_admin_auth

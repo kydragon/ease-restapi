@@ -9,7 +9,7 @@ __date__ = '2014/09/22'
 
 # import base64
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .. import config
 from .base import get, post, delete, build_query_url
 
 
@@ -27,7 +27,7 @@ def create_users(auth, play_load):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     return post(url, play_load, auth)
 
 
@@ -64,7 +64,7 @@ def pickup_users(auth, limit=None, cursor=None):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
 
     payload = []
     if limit:
@@ -112,7 +112,7 @@ def delete_users(auth, ql=None, limit=None):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
 
     """
     payload = []
@@ -150,5 +150,5 @@ def add_group_users(auth, group_id, usernames):
     """
 
     payload = {"usernames": usernames}
-    url = "%s/%s/%s/chatgroups/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME, group_id)
+    url = "%s/%s/%s/chatgroups/%s/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, group_id)
     return post(url, payload, auth)

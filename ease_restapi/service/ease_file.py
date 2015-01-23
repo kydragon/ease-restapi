@@ -8,15 +8,13 @@ __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/23'
 
 import os
-import six
 import os.path
 import requests
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+import six
+
+from .. import config
 from .base import http_result, build_file_rename, check_file_dir
-
-
-down_file_dir = check_file_dir(os.path.join(os.getcwd(), 'download'))
 
 
 def upload_media(auth, file_path):
@@ -48,7 +46,7 @@ def upload_media(auth, file_path):
     }
 
     six.print_('file_rename:', file_rename)
-    url = "%s/%s/%s/chatfiles" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/chatfiles" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     r = requests.post(url, files=files, headers=required_header, auth=auth)
     return http_result(r)
 
@@ -60,9 +58,11 @@ def write_file_data(res, file_name):
         :param file_name: 本地文件名
     """
 
+    down_file_dir = check_file_dir(os.path.join(os.getcwd(), 'download'))
+
     fp = None
     try:
-        fp = open('%s/%s' % (down_file_dir, file_name), 'wb')
+        fp = open(os.path.join(down_file_dir, file_name), 'wb')
         fp.write(res.content)
         error = 0
     except IOError:
@@ -96,7 +96,7 @@ def download_media(auth, file_name, secret):
         "Accept": "application/octet-stream"
     }
 
-    url = "%s/%s/%s/chatfiles/%s" % (HOST_SERVER, APP_ORG, APP_NAME, file_name)
+    url = "%s/%s/%s/chatfiles/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, file_name)
     res = requests.get(url, headers=required_header, auth=auth)
 
     return write_file_data(res, file_name)
@@ -127,7 +127,7 @@ def download_thumbnail(auth, file_name, secret):
         "Accept": "application/octet-stream"
     }
 
-    url = "%s/%s/%s/chatfiles/%s" % (HOST_SERVER, APP_ORG, APP_NAME, file_name)
+    url = "%s/%s/%s/chatfiles/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, file_name)
     res = requests.get(url, headers=required_header, auth=auth)
 
     return write_file_data(res, 'thumb_%s' % file_name)

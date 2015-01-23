@@ -7,11 +7,12 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
-import six
 from time import time
 from requests.auth import AuthBase
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME, EXPIRES_IN
+import six
+
+from .. import config
 from .base import post
 
 
@@ -79,7 +80,7 @@ class AppClientAuth(ServiceAuth):
         super(AppClientAuth, self).__init__()
         self.client_id = client_id
         self.client_secret = client_secret
-        self.url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
+        self.url = "%s/%s/%s/token" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
         self.token = None
 
     def acquire_token(self):
@@ -114,7 +115,7 @@ class AppAdminAccountAuth(ServiceAuth):
         super(AppAdminAccountAuth, self).__init__()
         self.username = username
         self.password = password
-        self.url = "%s/%s/%s/token" % (HOST_SERVER, APP_ORG, APP_NAME)
+        self.url = "%s/%s/%s/token" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
         self.token = None
 
     def acquire_token(self):
@@ -133,8 +134,8 @@ class AppAdminAccountAuth(ServiceAuth):
 
         success, result = post(self.url, payload)
         if success:
-            if EXPIRES_IN:
-                self.token = MeToken(result['access_token'], EXPIRES_IN)
+            if config.EXPIRES_IN:
+                self.token = MeToken(result['access_token'], config.EXPIRES_IN)
             else:
                 self.token = MeToken(result['access_token'], result['expires_in'])
         else:
@@ -159,7 +160,7 @@ class OrgAdminAccountAuth(ServiceAuth):
         super(OrgAdminAccountAuth, self).__init__()
         self.username = username
         self.password = password
-        self.url = "%s/management/token" % HOST_SERVER
+        self.url = "%s/management/token" % config.HOST_SERVER
         self.token = None
 
     def acquire_token(self):
@@ -177,8 +178,8 @@ class OrgAdminAccountAuth(ServiceAuth):
 
         success, result = post(self.url, payload)
         if success:
-            if EXPIRES_IN:
-                self.token = MeToken(result['access_token'], EXPIRES_IN)
+            if config.EXPIRES_IN:
+                self.token = MeToken(result['access_token'], config.EXPIRES_IN)
             else:
                 self.token = MeToken(result['access_token'], result['expires_in'])
         else:

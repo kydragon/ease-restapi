@@ -7,8 +7,7 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/23'
 
-import six
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .. import config
 from .base import put, get, post, delete
 
 
@@ -55,7 +54,7 @@ def create_group(auth, group_data):
         }
     """
 
-    url = "%s/%s/%s/chatgroups/" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/chatgroups/" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     return post(url, payload=group_data, auth=auth)
 
 
@@ -68,7 +67,7 @@ def delete_group(auth, group_id):
         DELETE /{org_name}/{app_name}/chatgroups/{group_id}
     """
 
-    url = "%s/%s/%s/chatgroups/%s" % (HOST_SERVER, APP_ORG, APP_NAME, group_id)
+    url = "%s/%s/%s/chatgroups/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, group_id)
     return delete(url, auth)
 
 
@@ -81,7 +80,7 @@ def details_group(auth, group_ids):
             GET /{org_name}/{app_name}/chatgroups/{group_id1},{group_id2}
         """
 
-    url = "%s/%s/%s/chatgroups/%s" % (HOST_SERVER, APP_ORG, APP_NAME, group_ids)
+    url = "%s/%s/%s/chatgroups/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, group_ids)
     return get(url, auth)
 
 
@@ -94,7 +93,7 @@ def pickup_group_users(auth, group_id):
         GET /{org_name}/{app_name}/chatgroups/{group_id}/users
     """
 
-    url = "%s/%s/%s/chatgroups/%s/users/" % (HOST_SERVER, APP_ORG, APP_NAME, group_id)
+    url = "%s/%s/%s/chatgroups/%s/users/" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, group_id)
     return get(url, auth)
 
 
@@ -105,7 +104,7 @@ def pickup_groups(auth):
         GET /{org_name}/{app_name}/chatgroups
     """
 
-    url = "%s/%s/%s/chatgroups" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/chatgroups" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     return get(url, auth)
 
 
@@ -119,7 +118,7 @@ def user_join_group(auth, group_id, username):
         POST /{org_name}/{app_name}/chatgroups/{group_id}/users/{user_primary_key}
     """
 
-    url = "%s/%s/%s/chatgroups/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, group_id, username)
+    url = "%s/%s/%s/chatgroups/%s/users/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, group_id, username)
     return post(url, {}, auth)
 
 
@@ -133,7 +132,7 @@ def user_kick_group(auth, group_id, username):
         DELETE /{org_name}/{app_name}/chatgroups/{group_id}/users/{user_primary_key}
     """
 
-    url = "%s/%s/%s/chatgroups/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, group_id, username)
+    url = "%s/%s/%s/chatgroups/%s/users/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, group_id, username)
     return delete(url, auth)
 
 
@@ -162,7 +161,7 @@ def modify_group(auth, group_id, **kwargs):
     # payload = {"groupname": groupname, "description": description, "description": description}
     # six.print_(kwargs)
 
-    url = "%s/%s/%s/chatgroups/%s" % (HOST_SERVER, APP_ORG, APP_NAME, group_id)
+    url = "%s/%s/%s/chatgroups/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, group_id)
     return put(url, kwargs, auth)
 
 
@@ -180,5 +179,5 @@ def pickup_user_group(auth, username):
         Response Body ：详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略
     """
 
-    url = "%s/%s/%s/users/%s/joined_chatgroups" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s/joined_chatgroups" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return get(url, auth)

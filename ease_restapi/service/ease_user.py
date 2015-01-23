@@ -14,7 +14,7 @@ u"""ring info user system local code.
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .. import config
 from .base import get, put, post, delete
 
 
@@ -38,7 +38,7 @@ def create_user_open(username, password):
     """
 
     payload = {"username": username, "password": password}
-    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     return post(url, payload=payload)
 
 
@@ -64,7 +64,7 @@ def create_user_credit(auth, username, password):
     """
 
     payload = {"username": username, "password": password}
-    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
     return post(url, payload=payload, auth=auth)
 
 
@@ -77,7 +77,7 @@ def delete_user(auth, username):
         DELETE /{org}/{app}/users/{username}
     """
 
-    url = "%s/%s/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return delete(url, auth)
 
 
@@ -101,7 +101,7 @@ def passwd_user(auth, username, new_password, old_password=None):
     if old_password:
         payload["old_password"] = old_password
 
-    url = "%s/%s/%s/users/%s/password" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s/password" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return put(url, payload, auth)
 
 
@@ -125,7 +125,7 @@ def pickup_user(auth, username):
 
     """
 
-    url = "%s/%s/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return get(url, auth)
 
 
@@ -141,5 +141,5 @@ def modify_nickname(auth, username, nickname):
     """
 
     payload = {"nickname": nickname}
-    url = "%s/%s/%s/users/%s" % (HOST_SERVER, APP_ORG, APP_NAME, username)
+    url = "%s/%s/%s/users/%s" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return put(url, payload, auth)

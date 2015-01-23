@@ -7,7 +7,7 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
 
-from .conf import HOST_SERVER, APP_ORG, APP_NAME
+from .. import config
 from .base import get, build_query_url  # build_query_string
 
 
@@ -30,7 +30,7 @@ def select_users(auth, ql=None):
         Response Body ： 详情参见示例返回值, 返回的json数据中会包含除上述属性之外的一些其他信息，均可以忽略。
     """
 
-    url = "%s/%s/%s/users" % (HOST_SERVER, APP_ORG, APP_NAME)
+    url = "%s/%s/%s/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME)
 
     # url = ''.join((url, build_query_string(ql)))
 
