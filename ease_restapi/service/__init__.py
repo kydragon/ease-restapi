@@ -7,7 +7,7 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
-from .auth import AppClientAuth, AppAdminAccountAuth, OrgAdminAccountAuth
+from .auth import AppClientAuth, AppAdminAccountAuth, OrgAdminAccountAuth, APP_AUTH
 
 from .ease_select import select_users
 from .ease_batch import create_users, delete_users, pickup_users, add_group_users

@@ -4,8 +4,8 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
-from chkinfos import duct_json
-from demo import test_main
+from .common import duct_json
+from .demo import test_main
 
 
 def test(request):

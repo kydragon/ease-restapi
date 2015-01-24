@@ -7,10 +7,6 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/25'
 
-# import sys
-#
-# sys.path.append('../..')
-
 import os.path
 
 import six
@@ -19,7 +15,7 @@ from .config import (APP_KEY, CLIENT_ID, CLIENT_SECRET, OPEN_OR_CREDIT,
                      APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD, ORG_ADMIN_PASSWORD, ORG_ADMIN_USERNAME)
 
 from ease_restapi.service import *
-from ease_restapi.bridge import create_easemob_user
+from ease_restapi.sulate.bridge import create_easemob_user
 from .common import id_generator, get_json_path
 
 APP_BASE_PATH = os.path.abspath(__file__)
@@ -423,7 +419,7 @@ def test_main():
     # result = test_select(True)
     # result = test_remain_user(2)
 
-    result = create_easemob_user('851112@qq.com', '123456')
+    result = create_easemob_user('78569@qq.com', '123456')
 
     return result
 

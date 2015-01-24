@@ -187,3 +187,15 @@ class OrgAdminAccountAuth(ServiceAuth):
             pass
 
         return self.token
+
+
+def get_app_auth(mode=0):
+    if mode == 0:
+        return
+    elif mode == 1:
+        return AppClientAuth(config.APP_ADMIN_USERNAME, config.APP_ADMIN_PASSWORD)
+    elif mode == 2:
+        OrgAdminAccountAuth(config.APP_ADMIN_USERNAME, config.APP_ADMIN_PASSWORD)
+
+
+APP_AUTH = get_app_auth

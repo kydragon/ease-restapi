@@ -27,14 +27,11 @@ __doc__ = 'local and ring-info code integration.'
 
 import hmac
 import hashlib
-
 import six
 
-from .config import APP_KEY, OPEN_OR_CREDIT, SWITCH_JOIN_LOCAL, APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD
-from .service import (AppAdminAccountAuth, create_user_open, create_user_credit,
-                      passwd_user, pickup_user, modify_nickname)
-
-app_auth = AppAdminAccountAuth(APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD)
+from ease_restapi import config
+from ease_restapi.service import (AppAdminAccountAuth, create_user_open, create_user_credit,
+                                  passwd_user, pickup_user, modify_nickname)
 
 
 class HashFunction(object):
@@ -42,7 +39,7 @@ class HashFunction(object):
     def mac_new(cls, password):
         """hmac."""
 
-        new_password = hmac.new(APP_KEY, password, hashlib.md5).hexdigest()
+        new_password = hmac.new(config.APP_KEY, password, hashlib.md5).hexdigest()
         return new_password
 
     @classmethod
@@ -60,7 +57,7 @@ class BothFunction(object):
 
         # import this code.
 
-        password = ''.join((APP_KEY, password))
+        password = ''.join((config.APP_KEY, password))
 
         d = {}
         for c in (65, 97):
@@ -140,12 +137,13 @@ def create_easemob_user(local_username, local_password):
         :param local_password: 本地账户密码
     """
 
-    if not SWITCH_JOIN_LOCAL:
+    if not config.SWITCH_JOIN_LOCAL:
         return False
 
     remote_username, remote_password = chalk_remote_user(local_username, local_password)
 
-    if OPEN_OR_CREDIT:
+    if config.OPEN_OR_CREDIT:
+        app_auth = AppAdminAccountAuth(config.APP_ADMIN_USERNAME, config.APP_ADMIN_PASSWORD)
         success, result = create_user_credit(app_auth, remote_username, remote_password)
     else:
         success, result = create_user_open(remote_username, remote_password)
@@ -164,11 +162,11 @@ def passwd_easemob_user(local_username, local_password):
         :param local_password: 本地账户密码
     """
 
-    if not SWITCH_JOIN_LOCAL:
+    if not config.SWITCH_JOIN_LOCAL:
         return False
 
     remote_username, remote_password = chalk_remote_user(local_username, local_password)
-
+    app_auth = AppAdminAccountAuth(config.APP_ADMIN_USERNAME, config.APP_ADMIN_PASSWORD)
     success, result = passwd_user(app_auth, remote_username, remote_password)
     if success:
         flag = True
@@ -185,10 +183,11 @@ def change_easemob_nickname(local_username, local_nickname):
         :param local_nickname: 本地账户昵称
     """
 
-    if not SWITCH_JOIN_LOCAL:
+    if not config.SWITCH_JOIN_LOCAL:
         return False
 
     remote_username = check_user_id(local_username)
+    app_auth = AppAdminAccountAuth(config.APP_ADMIN_USERNAME, config.APP_ADMIN_PASSWORD)
     success, result = modify_nickname(app_auth, remote_username, local_nickname)
     if success:
         flag = True

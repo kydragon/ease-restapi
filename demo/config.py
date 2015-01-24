@@ -7,13 +7,7 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
-import sys
-import os.path
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from ease_restapi import config
-
 
 # ORG管理员信息:
 ORG_ADMIN_USERNAME = "kylinfish"
@@ -31,7 +25,7 @@ config.APP_ADMIN_PASSWORD = APP_ADMIN_PASSWORD
 
 # APP配置信息：
 APP_KEY = 'kylin9999#demo'
-APP_ORG = 'kylindemo'
+APP_ORG = 'kylin9999'
 
 APP_NAME = 'demo'
 CLIENT_ID = 'YXA66mgIMKMTEeS2e530rkCQUA'

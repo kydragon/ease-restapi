@@ -3,7 +3,7 @@
 
 import six
 
-from . import join_easemob_local, passwd_easemob_user, change_easemob_nickname
+from ease_restapi import join_easemob_local, passwd_easemob_user, change_easemob_nickname
 
 
 def login(request):
