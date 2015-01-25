@@ -12,7 +12,7 @@ import os.path
 import six
 
 from ease_restapi.service import *
-from ease_restapi.sulate.bridge import create_easemob_user
+from ease_restapi.simplify.bridge import create_easemob_user
 from .common import id_generator, get_json_path
 
 from .config import (APP_KEY, CLIENT_ID, CLIENT_SECRET, OPEN_OR_CREDIT,

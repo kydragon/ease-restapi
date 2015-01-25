@@ -9,4 +9,4 @@ __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 __doc__ = 'local and ring-info code integration.'
 
-from .sulate import change_easemob_nickname, passwd_easemob_user, join_easemob_local
+from .simplify import change_easemob_nickname, passwd_easemob_user, join_easemob_local

@@ -18,7 +18,7 @@ NEWS = open(os.path.join(here, 'CHANGELOG.rst')).read()
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 zip_safe = not on_rtd
 
-version = '1.0'
+version = '1.1'
 
 setup(
     name='ease-restapi',
@@ -31,7 +31,7 @@ setup(
     author_email='kylinfish@126.com',
     keywords='ease-restapi',
     url='https://bitbucket.org/kylinfish/ease-restapi',
-    packages=['ease_restapi.service', 'ease_restapi.sulate', 'ease_restapi.demo'],
+    packages=['ease_restapi.service', 'ease_restapi.simplify', 'ease_restapi.demo'],
     platforms=["any"],
     zip_safe=zip_safe,
     classifiers=[
