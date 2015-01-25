@@ -18,7 +18,7 @@ NEWS = open(os.path.join(here, 'CHANGELOG.rst')).read()
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 zip_safe = not on_rtd
 
-version = '0.1'
+version = '1.0'
 
 setup(
     name='ease-restapi',
@@ -36,7 +36,7 @@ setup(
     zip_safe=zip_safe,
     classifiers=[
         # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'Development Status :: 4 - Beta'
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
