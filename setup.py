@@ -2,14 +2,7 @@
 # coding=utf-8
 
 import os
-
-try:
-    import setuptools
-
-    setup = setuptools.setup
-except ImportError:
-    setuptools = None
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
@@ -31,7 +24,8 @@ setup(
     author_email='kylinfish@126.com',
     keywords='ease-restapi',
     url='https://bitbucket.org/kylinfish/ease-restapi',
-    packages=['ease_restapi.service', 'ease_restapi.simplify', 'ease_restapi.demo'],
+    # packages=['ease_restapi', 'ease_restapi.service', 'ease_restapi.simplify', 'ease_restapi.demo'],
+    packages=find_packages(),
     platforms=["any"],
     zip_safe=zip_safe,
     classifiers=[
@@ -47,6 +41,6 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Utilities',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        'License :: OSI Approved :: MIT License'
+        'License :: OSI Approved :: MIT License',
     ]
 )

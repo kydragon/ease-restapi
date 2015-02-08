@@ -8,9 +8,11 @@ include ease_restapi.egg-info/dependency_links.txt
 include ease_restapi.egg-info/requires.txt
 include ease_restapi.egg-info/top_level.txt
 include ease_restapi.egg-info/zip-safe
+include ease_restapi/__init__.py
+include ease_restapi/config.py
 include ease_restapi/demo/__init__.py
 include ease_restapi/demo/admin.py
-include ease_restapi/demo/chkinfos.py
+include ease_restapi/demo/common.py
 include ease_restapi/demo/models.py
 include ease_restapi/service/__init__.py
 include ease_restapi/service/auth.py
@@ -26,7 +28,11 @@ include ease_restapi/service/ease_msgdata.py
 include ease_restapi/service/ease_records.py
 include ease_restapi/service/ease_select.py
 include ease_restapi/service/ease_user.py
-include ease_restapi/sulate/__init__.py
-include ease_restapi/sulate/bridge.py
-include ease_restapi/sulate/usage.py
-recursive-include ease_restapi/demo/locale *
+include ease_restapi/simplify/__init__.py
+include ease_restapi/simplify/bridge.py
+include ease_restapi/simplify/usage.py
+
+include ease_restapi/demo/locale/zh_CN/LC_MESSAGES/django.po
+include ease_restapi/demo/locale/zh_CN/LC_MESSAGES/django.mo
+
+recursive-include project_demo *.py

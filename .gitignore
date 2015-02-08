@@ -1,3 +1,7 @@
 *.pyc
 
 .idea/
+
+dist/
+build/
+ease_restapi.egg-info/
