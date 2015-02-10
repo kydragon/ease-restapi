@@ -11,7 +11,7 @@ NEWS = open(os.path.join(here, 'CHANGELOG.rst')).read()
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 zip_safe = not on_rtd
 
-version = '1.2'
+version = '1.3'
 
 setup(
     name='ease-restapi',
