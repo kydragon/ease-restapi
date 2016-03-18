@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 
 """ring info user system local code.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
+"""
 
 # import base64
 
-from .. import config
 from .base import get, post, delete, build_query_url
+from .. import config
 
 
 def create_users(auth, play_load):

@@ -5,10 +5,10 @@ u"""
 获取APP管理员Token
 环信提供的REST API需要权限才能访问, 权限通过发送HTTP请求时携带token来体现, 下面描述获取token的方式.
 小说明: api描述的时候使用到app的{client_id}或者{app管理员密码}之类的这种参数需要替换成具体的值.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/24'
+"""
 
 import json
 import requests

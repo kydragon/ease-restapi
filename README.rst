@@ -1,4 +1,3 @@
-
 Introduce:
 ----------
 本实例使用了 *request*  <http://docs.python-requests.org/en/latest/>类库来调用环信的REST API,

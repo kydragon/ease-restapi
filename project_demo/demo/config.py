@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """config data.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
+"""
 
 from ease_restapi import config
 

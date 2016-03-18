@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 
 """ring info client service sdk.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
+"""
 
 import base64
 
-from .. import config
 from .base import get
+from .. import config
 
 
 def export_chat_message(auth, ql=None, limit=None, cursor=None):

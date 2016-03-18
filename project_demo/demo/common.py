@@ -2,17 +2,17 @@
 # -*- coding: utf-8 -*-
 
 """local and ring-info code integration.
+
+__author__ = 'kylinfish@126.com'
+__date__ = '2014/09/20'
 """
 
-__author__ = 'kylin'
-__date__ = '2014/09/20'
-
-import six
 import json
+import os.path
 import random
 from string import ascii_uppercase, digits
-import os.path
 
+import six
 from django.http import HttpResponse
 
 if six.PY3:
