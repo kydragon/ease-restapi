@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-u"""ring info user system local code.
+"""ring info user system local code.
 
     注册IM用户[单个]
     在url指定的org和app中创建一个新的用户, 分两种模式：开放注册 和 授权注册.
@@ -9,13 +9,13 @@ u"""ring info user system local code.
     "授权注册"模式: 注册环信账号必须携带管理员身份认证信息.
     推荐使用"授权注册", 这样可以防止某些已经获取了注册url和知晓注册流程的人恶意向服务器大量注册垃圾用户.
     注意：以下api中提到的${token}是用户的具体token值, 企业管理员和app管理员的token均可.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
+"""
 
-from .. import config
 from .base import get, put, post, delete
+from .. import config
 
 
 def create_user_open(username, password):

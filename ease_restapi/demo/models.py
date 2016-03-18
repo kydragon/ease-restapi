@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 
 """ring info data model.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
+"""
 
-from django.db import models
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.models import User
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class RingInfoManager(models.Manager):

@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """config data.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
-
+"""
 
 # ORG管理员信息:
 ORG_ADMIN_USERNAME = ''

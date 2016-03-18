@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """ring info friend system local code.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
+"""
 
-from .. import config
 from .base import get, post, delete
+from .. import config
 
 
 def create_friend(auth, owner_username, friend_username):

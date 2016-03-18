@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """ring info client service sdk.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/23'
+"""
 
 import os
 import os.path
@@ -13,8 +13,8 @@ import requests
 
 import six
 
-from .. import config
 from .base import http_result, build_file_rename, check_file_dir
+from .. import config
 
 
 def upload_media(auth, file_path):

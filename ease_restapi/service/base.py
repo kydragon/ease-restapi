@@ -2,20 +2,19 @@
 # -*- coding: utf-8 -*-
 
 """ring info remote api interface base.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
+"""
 
-import os
-import time
 import json
-import random
+import os
 import os.path
+import random
 import requests
+import time
 
 import six
-
 
 if six.PY3:
     from urllib.parse import urlencode, quote

@@ -7,13 +7,13 @@
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
 
-from time import time
 from requests.auth import AuthBase
+from time import time
 
 import six
 
-from .. import config
 from .base import post
+from .. import config
 
 
 class MeToken(object):

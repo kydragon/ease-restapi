@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """ring info model check.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
+"""
 
 from .models import RingInfo
 

@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """ring info client service sdk.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/20'
+"""
 
-from .. import config
 from .base import get, post
+from .. import config
 
 
 def build_message_data(message, target, target_type="users", username=None, **args):
@@ -250,11 +250,3 @@ def send_transmission_message(auth, dict_data):
     """
 
     return send_message(auth, dict_data)
-
-
-
-
-
-
-
-

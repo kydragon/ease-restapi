@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """ring info client service sdk.
-"""
 
 __author__ = 'kylin'
 __date__ = '2015/01/25'
+"""
 
 
 class MessageData(object):

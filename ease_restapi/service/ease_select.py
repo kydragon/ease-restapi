@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """ring info user system local code.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/22'
+"""
 
-from .. import config
 from .base import get, build_query_url  # build_query_string
+from .. import config
 
 
 def select_users(auth, ql=None):

@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-u"""ring info black list local code.
-"""
+"""ring info black list local code.
 
 __author__ = 'kylin'
 __date__ = '2015/01/20'
+"""
 
-from .. import config
 from .base import get, post, delete
+from .. import config
 
 
 def add_user_blacklist(auth, username, usernames):
@@ -67,4 +67,3 @@ def pickup_user_blacklist(auth, username):
 
     url = "%s/%s/%s/users/%s/blocks/users" % (config.HOST_SERVER, config.APP_ORG, config.APP_NAME, username)
     return get(url, auth)
-

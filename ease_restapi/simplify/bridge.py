@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+"""local and ring-info code integration.
 
-u"""
 集成后:
     注册(附带)
     修改密码(附带)
@@ -19,14 +18,14 @@ u"""
     check_user_id:      账户生成方式.
     chalk_remote_user:  密码生成方式.
     join_easemob_local: 环信账户状态字段, 本地账户昵称字段.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/28'
-__doc__ = 'local and ring-info code integration.'
+"""
 
-import hmac
 import hashlib
+import hmac
+
 import six
 
 from ease_restapi import config

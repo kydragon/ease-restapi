@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """ring info client service sdk.
-"""
 
 __author__ = 'kylinfish@126.com'
 __date__ = '2014/09/23'
+"""
 
-from .. import config
 from .base import put, get, post, delete
+from .. import config
 
 
 def build_group_data(group_name, desc, owner, public, approval=True, members=None):
